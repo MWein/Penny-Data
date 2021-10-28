@@ -1,0 +1,32 @@
+{
+  "name": "penny-data",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node app.js",
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MWein/Penny-Data.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/MWein/Penny-Data/issues"
+  },
+  "homepage": "https://github.com/MWein/Penny-Data#readme",
+  "dependencies": {
+    "cron": "^1.8.2",
+    "dotenv": "^10.0.0",
+    "express": "^4.17.1",
+    "mongoose": "^6.0.12",
+    "superagent": "^6.1.0"
+  },
+  "devDependencies": {
+    "jest": "^27.3.1",
+    "eslint": "^8.1.0",
+    "eslint-plugin-jest": "^25.2.2"
+  }
+}
