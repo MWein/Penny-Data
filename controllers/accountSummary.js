@@ -1,6 +1,6 @@
 const balancesUtil = require('../tradier/getBalances')
 const positionUtil = require('../tradier/getPositions')
-const gainLossService = require('./getGainLoss')
+const gainLossService = require('./gainLoss')
 
 const accountSummaryController = async (req, res) => {
   try {
