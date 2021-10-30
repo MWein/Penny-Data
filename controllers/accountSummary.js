@@ -29,13 +29,13 @@ const accountSummaryController = async (req, res) => {
 
     res.json({
       balances,
-      openPositions,
       monthOptionProfit,
       monthStockProfit,
       monthTotalProfit,
       yearOptionProfit,
       yearStockProfit,
-      yearTotalProfit
+      yearTotalProfit,
+      openPositions,
     })
   } catch (e) {
     console.log(e)
