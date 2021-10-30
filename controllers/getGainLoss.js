@@ -6,11 +6,14 @@ const {
 
 const getGainLossController = async (req, res) => {
   try {
+    const startDate = req.query.startDate ? new Date(req.query.startDate) : new Date(0) // Beginning of time
+    const endDate = req.query.endDate ? new Date(req.query.endDate) : new Date() // Today
+
     const gainLossData = await gainLossSchema
-      .find()
+      .find({ close_date: { $gte: startDate, $lte: endDate } })
       .sort({ close_date: -1 })
       .select('-_id -__v -hashId')
-    
+
     const callOptions = gainLossData.filter(gl =>
       determineOptionTypeFromSymbol(gl.symbol) === 'call')
     const putOptions = gainLossData.filter(gl =>
@@ -32,6 +35,7 @@ const getGainLossController = async (req, res) => {
       gainLossData
     })
   } catch (e) {
+    console.log(e)
     res.status(500).send('Error')
   }
 }
