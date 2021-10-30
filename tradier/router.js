@@ -1,10 +1,10 @@
 const express = require('express')
 const app = express()
 
+const { getPositionsController } = require('./getPositions')
 
-app.get('/test', (req, res) => {
-  res.send('Hi')
-})
+
+app.get('/positions', getPositionsController)
 
 
 module.exports = app
