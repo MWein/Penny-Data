@@ -20,7 +20,6 @@ const getPositionsController = async (req, res) => {
     const positions = await getPositions()
     res.json(positions)
   } catch (e) {
-    console.log('FUCK!', e)
     res.status(500).send('Error')
   }
 }
