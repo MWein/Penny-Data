@@ -53,7 +53,19 @@ const gainLossGraph = async (startDate, endDate, granularity, optionsOnly) => {
     }
     return graph
   } else if (granularity === 'month') {
-    return []
+    // Creating new date out of date to avoid weird mutation error
+    const date = new Date(gainLossData[gainLossData.length - 1].close_date)
+    const graph = []
+    let currentTotal = 0
+    while (date <= endDate) {
+      const dateStr = date.toISOString().slice(0, 7)
+      const gainLossToday = gainLossData.filter(gl => gl.close_date.toISOString().slice(0, 7) === dateStr)
+      const change = gainLossToday.reduce((acc, gl) => acc + gl.gain_loss, 0)
+      currentTotal = currentTotal + change
+      graph.push({ label: dateStr, value: currentTotal, change })
+      date.setDate(date.setMonth(date.getMonth() + 1))
+    }
+    return graph
   }
 }
 
