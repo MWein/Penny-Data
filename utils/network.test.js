@@ -70,23 +70,38 @@ describe('get', () => {
     })
   })
 
-  it('Returns the response body', async () => {
-    const response = await get('somepath')
+  it('Returns the response body; By default, uses the cache', async () => {
+    const response = await get('somecachedpath')
     expect(response).toEqual('someresponse')
+    expect(superagent.get).toHaveBeenCalledTimes(1)
+
+    const response2 = await get('somecachedpath')
+    expect(response2).toEqual('someresponse')
+    expect(superagent.get).toHaveBeenCalledTimes(1)
+  })
+
+  it('Returns the response body; Does not use cache', async () => {
+    const response = await get('somenotcachedpath', false)
+    expect(response).toEqual('someresponse')
+    expect(superagent.get).toHaveBeenCalledTimes(1)
+
+    const response2 = await get('somenotcachedpath', false)
+    expect(response2).toEqual('someresponse')
+    expect(superagent.get).toHaveBeenCalledTimes(2)
   })
 
   it('Creates url out of BASEPATH and path', async () => {
-    await get('somepath')
+    await get('somepath', false)
     expect(superagent.get).toHaveBeenCalledWith('https://sandbox.example.com/somepath')
   })
 
   it('Sets authorization header using APIKEY in the proper format', async () => {
-    await get('somepath')
+    await get('somepath', false)
     expect(set1).toHaveBeenCalledWith('Authorization', 'Bearer somekey')
   })
 
   it('Sets accept header', async () => {
-    await get('somepath')
+    await get('somepath', false)
     expect(set2).toHaveBeenCalledWith('Accept', 'application/json')
   })
 
@@ -96,7 +111,7 @@ describe('get', () => {
     })
 
     try {
-      await get('somepath')
+      await get('somepath', false)
       expect(1).toEqual(2) // Force failure if nothing is thrown
     } catch (e) {
       expect(e).toEqual(new Error('Ope'))

@@ -12,12 +12,14 @@ const _createFormString = body => Object.keys(body).map(key => {
 }).join('&')
 
 
-const get = async (path) => {
+const get = async (path, useCache = true) => {
   const url = `${process.env.BASEPATH}${path}`
 
-  const cachedResponse = getCache.get(url)
-  if (cachedResponse) {
-    return cachedResponse
+  if (useCache) {
+    const cachedResponse = getCache.get(url)
+    if (cachedResponse) {
+      return cachedResponse
+    }
   }
 
   const response = await superagent.get(url)
@@ -28,8 +30,10 @@ const get = async (path) => {
     })
     .retry(5)
 
-  // Cache for 15 minutes
-  getCache.set(url, cachedResponse, 900)
+  if (useCache) {
+    // Cache for 15 minutes
+    getCache.set(url, response.body, 900)
+  }
 
   return response.body
 }
