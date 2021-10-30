@@ -15,17 +15,6 @@ const getPositions = async () => {
 }
 
 
-const getPositionsController = async (req, res) => {
-  try {
-    const positions = await getPositions()
-    res.json(positions)
-  } catch (e) {
-    res.status(500).send('Error')
-  }
-}
-
-
 module.exports = {
   getPositions,
-  getPositionsController,
 }

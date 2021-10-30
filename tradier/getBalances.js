@@ -13,17 +13,6 @@ const getBalances = async () => {
 }
 
 
-const getBalancesController = async (req, res) => {
-  try {
-    const balances = await getBalances()
-    res.json(balances)
-  } catch (e) {
-    res.status(500).send('Error')
-  }
-}
-
-
 module.exports = {
   getBalances,
-  getBalancesController,
 }
