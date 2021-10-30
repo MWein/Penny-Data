@@ -3,7 +3,7 @@ const express = require('express')
 const app = express()
 const bodyParser = require('body-parser')
 
-const { accountInfoController } = require('./controllers/getAccountInfo')
+const { accountSummaryController } = require('./controllers/accountSummary')
 const { getLogsController } = require('./controllers/getLogs')
 const { getGainLossController } = require('./controllers/getGainLoss')
 
@@ -14,7 +14,7 @@ app.use(bodyParser.json())
 
 app.get('/logs', getLogsController)
 
-app.get('/account-info', accountInfoController)
+app.get('/account-summary', accountSummaryController)
 app.get('/gain-loss', getGainLossController)
 
 // Settings
