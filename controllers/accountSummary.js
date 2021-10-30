@@ -28,7 +28,7 @@ const accountSummaryController = async (req, res) => {
     const yearTotalProfit = yearGainLoss.totalGL
 
     res.json({
-      balances,
+      ...balances,
       monthOptionProfit,
       monthStockProfit,
       monthTotalProfit,
