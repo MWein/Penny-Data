@@ -2,6 +2,7 @@ require('dotenv').config()
 const express = require('express')
 const app = express()
 const bodyParser = require('body-parser')
+const cors = require('cors')
 
 const { pennyStatusController } = require('./controllers/pennyStatus')
 
@@ -13,6 +14,7 @@ const settings = require('./controllers/settings')
 const watchlist = require('./controllers/watchlist')
 
 app.use(bodyParser.json())
+app.use(cors())
 
 app.get('/penny-status', pennyStatusController)
 app.get('/logs', getLogsController)
