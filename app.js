@@ -16,7 +16,11 @@ const watchlist = require('./controllers/watchlist')
 app.use(bodyParser.json())
 app.use(cors())
 
+// Actually used!
 app.get('/penny-status', pennyStatusController)
+
+
+// Not used yet
 app.get('/logs', getLogsController)
 
 app.get('/account-summary', accountSummaryController)
