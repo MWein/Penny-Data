@@ -3,6 +3,8 @@ const express = require('express')
 const app = express()
 const bodyParser = require('body-parser')
 
+const { pennyStatusController } = require('./controllers/pennyStatus')
+
 const { accountSummaryController } = require('./controllers/accountSummary')
 const { getLogsController } = require('./controllers/getLogs')
 const gainLoss = require('./controllers/gainLoss')
@@ -12,6 +14,7 @@ const watchlist = require('./controllers/watchlist')
 
 app.use(bodyParser.json())
 
+app.get('/penny-status', pennyStatusController)
 app.get('/logs', getLogsController)
 
 app.get('/account-summary', accountSummaryController)
