@@ -1,6 +1,8 @@
 const balancesUtil = require('../tradier/getBalances')
 const positionUtil = require('../tradier/getPositions')
+const { isOption, determineOptionTypeFromSymbol, getUnderlying } = require('../utils/determineOptionType')
 const gainLossService = require('./gainLoss')
+const quotesUtil = require('../tradier/getQuotes')
 
 const accountSummaryController = async (req, res) => {
   try {
@@ -20,6 +22,22 @@ const accountSummaryController = async (req, res) => {
       gainLossService.getGainLoss(firstOfYear, today),
     ])
 
+    const options = openPositions.filter(pos => isOption(pos.symbol))
+    const optionsTickers = options.map(opt => opt.symbol)
+    const quotes = await quotesUtil.getQuotes(optionsTickers)
+
+    const optionsContracts = options.map(pos => {
+      return {
+        symbol: getUnderlying(pos.symbol),
+        type: determineOptionTypeFromSymbol(pos.symbol),
+        contracts: pos.quantity * -1,
+        covered: 'no', // TODO
+        nextExpiration: new Date(quotes.find(quote => quote.symbol === pos.symbol).expiration_date),
+        premium: pos.cost_basis * -1,
+      }
+    })
+
+
     const monthOptionProfit = monthGainLoss.optionGL
     const monthStockProfit = monthGainLoss.stockGL
     const monthTotalProfit = monthGainLoss.totalGL
@@ -35,7 +53,7 @@ const accountSummaryController = async (req, res) => {
       yearOptionProfit,
       yearStockProfit,
       yearTotalProfit,
-      openPositions,
+      optionsContracts,
     })
   } catch (e) {
     console.log(e)
