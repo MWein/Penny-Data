@@ -18,12 +18,12 @@ app.use(cors())
 
 // Actually used!
 app.get('/penny-status', pennyStatusController)
+app.get('/account-summary', accountSummaryController)
+app.get('/watchlist', watchlist.getWatchlistController)
 
 
 // Not used yet
 app.get('/logs', getLogsController)
-
-app.get('/account-summary', accountSummaryController)
 app.get('/gain-loss', gainLoss.getGainLossController)
 app.get('/gain-loss-graph', gainLoss.getGainLossGraphController)
 
@@ -31,7 +31,5 @@ app.get('/gain-loss-graph', gainLoss.getGainLossGraphController)
 app.get('/settings', settings.getSettingsController)
 app.put('/settings', settings.setSettingsController)
 
-// Watchlist
-app.get('/watchlist', watchlist.getWatchlistController)
 
 module.exports = app
