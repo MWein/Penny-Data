@@ -20,10 +20,10 @@ app.use(cors())
 app.get('/penny-status', pennyStatusController)
 app.get('/account-summary', accountSummaryController)
 app.get('/watchlist', watchlist.getWatchlistController)
+app.get('/logs', getLogsController)
 
 
 // Not used yet
-app.get('/logs', getLogsController)
 app.get('/gain-loss', gainLoss.getGainLossController)
 app.get('/gain-loss-graph', gainLoss.getGainLossGraphController)
 

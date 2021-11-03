@@ -40,7 +40,7 @@ const gainLossGraph = async (startDate, endDate, granularity, optionsOnly) => {
 
   if (granularity === 'day') {
     // Creating new date out of date to avoid weird mutation error
-    const date = new Date(gainLossData[gainLossData.length - 1].close_date)
+    const date = new Date(startDate)
     const graph = []
     let currentTotal = 0
     while (date <= endDate) {
@@ -54,7 +54,7 @@ const gainLossGraph = async (startDate, endDate, granularity, optionsOnly) => {
     return graph
   } else if (granularity === 'month') {
     // Creating new date out of date to avoid weird mutation error
-    const date = new Date(gainLossData[gainLossData.length - 1].close_date)
+    const date = new Date(startDate)
     const graph = []
     let currentTotal = 0
     while (date <= endDate) {
@@ -97,12 +97,19 @@ const getGainLossController = async (req, res) => {
 
 const getGainLossGraphController = async (req, res) => {
   try {
-    const startDate = req.query.startDate ? new Date(req.query.startDate) : new Date(0) // Beginning of time
-    const endDate = req.query.endDate ? new Date(req.query.endDate) : new Date() // Today
+    const timespan = req.query.timespan || 'year'
+
+    let startDate = new Date()
+    if (timespan === 'year') {
+      startDate.setFullYear(startDate.getFullYear() - 1)
+    } else if (timespan === 'month') {
+      startDate.setMonth(startDate.getMonth() - 1)
+    }
+
     const granularity = req.query.granularity || 'day'
     const optionsOnly = req.query['options-only'] === 'true'
-    const gainLossData = await gainLossGraph(startDate, endDate, granularity, optionsOnly)
-    res.json(gainLossData)
+    const gainLossGraphData = await gainLossGraph(startDate, new Date(), granularity, optionsOnly)
+    res.json(gainLossGraphData)
   } catch (e) {
     console.log(e)
     res.status(500).send('Error')
