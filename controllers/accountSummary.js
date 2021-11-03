@@ -46,11 +46,11 @@ const accountSummaryController = async (req, res) => {
         symbol: getUnderlying(pos.symbol),
         type: determineOptionTypeFromSymbol(pos.symbol),
         contracts: pos.quantity * -1,
-        nextExpiration: quotes.find(quote => quote.symbol === pos.symbol).expiration_date,
+        expiration: quotes.find(quote => quote.symbol === pos.symbol).expiration_date,
         premium: pos.cost_basis * -1,
       }
     }).reduce((acc, contract) => {
-      const key = `${contract.symbol}${contract.type}${contract.nextExpiration}`
+      const key = `${contract.symbol}${contract.type}${contract.expiration}`
       const old = acc[key] || { contracts: 0, premium: 0 }
 
       const totalBuyToCloseOrders = buyToCloseOrders
@@ -70,7 +70,7 @@ const accountSummaryController = async (req, res) => {
       }
     }, {}))
       .sort((a, b) => {
-        return new Date(a.nextExpiration) - new Date(b.nextExpiration)
+        return new Date(a.expiration) - new Date(b.expiration)
       })
 
 
