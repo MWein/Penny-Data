@@ -69,6 +69,9 @@ const accountSummaryController = async (req, res) => {
         }
       }
     }, {}))
+      .sort((a, b) => {
+        return new Date(a.nextExpiration) - new Date(b.nextExpiration)
+      })
 
 
     const monthOptionProfit = monthGainLoss.optionGL
