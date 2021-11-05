@@ -27,7 +27,6 @@ const filterForOptionBuyToCloseOrders = orders =>
     ord.class === 'option'
     && [ 'open', 'partially_filled', 'pending', 'calculated', 'accepted_for_bidding', 'held' ].includes(ord.status)
     && ord.side === 'buy_to_close'
-    && isOption(ord.option_symbol)
   )
 
 

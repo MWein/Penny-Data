@@ -1,5 +1,5 @@
 const superagent = require('superagent')
-const NodeCache = require( "node-cache" )
+const NodeCache = require( 'node-cache' )
 const getCache = new NodeCache()
 
 

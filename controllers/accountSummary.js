@@ -4,6 +4,7 @@ const { isOption, determineOptionTypeFromSymbol, getUnderlying } = require('../u
 const gainLossService = require('./gainLoss')
 const quotesUtil = require('../tradier/getQuotes')
 const ordersUtil = require('../tradier/getOrders')
+const uniqBy = require('lodash/uniqBy')
 
 
 const getCoveredText = (btcOrders, numPositions) => {
@@ -37,13 +38,16 @@ const accountSummaryController = async (req, res) => {
 
     const options = openPositions.filter(pos => isOption(pos.symbol))
     const optionsTickers = options.map(opt => opt.symbol)
-    const buyToCloseOrders = ordersUtil.filterForOptionBuyToCloseOrders(orders)
+
+    // For some reason I can't explain, Tradier sends back duplicate orders with the same ID
+    const buyToCloseOrders = uniqBy(ordersUtil.filterForOptionBuyToCloseOrders(orders), 'id')
 
     const quotes = await quotesUtil.getQuotes(optionsTickers)
 
     const optionsContracts = Object.values(options.map(pos => {
       return {
         symbol: getUnderlying(pos.symbol),
+        optionSymbol: pos.symbol,
         type: determineOptionTypeFromSymbol(pos.symbol),
         contracts: pos.quantity * -1,
         expiration: quotes.find(quote => quote.symbol === pos.symbol).expiration_date,
@@ -54,7 +58,7 @@ const accountSummaryController = async (req, res) => {
       const old = acc[key] || { contracts: 0, premium: 0 }
 
       const totalBuyToCloseOrders = buyToCloseOrders
-        .filter(x => x.symbol === contract.symbol)
+        .filter(x => x.option_symbol === contract.optionSymbol)
         .reduce((acc, x) => acc + x.quantity, 0)
 
       const newContracts = contract.contracts + old.contracts
