@@ -50,7 +50,7 @@ const accountSummaryController = async (req, res) => {
         optionSymbol: pos.symbol,
         type: determineOptionTypeFromSymbol(pos.symbol),
         contracts: pos.quantity * -1,
-        expiration: quotes.find(quote => quote.symbol === pos.symbol).expiration_date,
+        expiration: quotes.find(quote => quote.symbol === pos.symbol)?.expiration_date || '2021-01-01',
         premium: pos.cost_basis * -1,
       }
     }).reduce((acc, contract) => {
