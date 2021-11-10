@@ -9,7 +9,7 @@ const { pennyStatusController } = require('./controllers/pennyStatus')
 const { accountSummaryController } = require('./controllers/accountSummary')
 const { getLogsController } = require('./controllers/getLogs')
 const gainLoss = require('./controllers/gainLoss')
-
+const positionGraph = require('./controllers/positionGraph')
 const settings = require('./controllers/settings')
 const watchlist = require('./controllers/watchlist')
 
@@ -22,10 +22,10 @@ app.get('/account-summary', accountSummaryController)
 app.get('/watchlist', watchlist.getWatchlistController)
 app.get('/logs', getLogsController)
 
-
-// Not used yet
 app.get('/gain-loss', gainLoss.getGainLossController)
 app.get('/gain-loss-graph', gainLoss.getGainLossGraphController)
+
+app.get('/position-history-graph', positionGraph.getPositionGraphDataController)
 
 // Settings
 app.get('/settings', settings.getSettingsController)
