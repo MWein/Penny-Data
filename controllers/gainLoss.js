@@ -9,8 +9,7 @@ const {
 // Since the gain/loss endpoint for tradier doesn't work in the paper envrionment
 // We need to use the position history table instead
 const _retrieveDataBasedOnEnvironment = async (startDate, endDate) => {
-  //const envrionment = process.env.BASEPATH.includes('sandbox') ? 'np' : 'prod'
-  const envrionment = 'np'
+  const envrionment = process.env.BASEPATH.includes('sandbox') ? 'np' : 'prod'
 
   if (envrionment === 'prod') {
     const gainLossData = await gainLossSchema
