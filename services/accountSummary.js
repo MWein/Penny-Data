@@ -1,7 +1,7 @@
 const balancesUtil = require('../tradier/getBalances')
 const positionUtil = require('../tradier/getPositions')
 const { isOption, determineOptionTypeFromSymbol, getUnderlying } = require('../utils/determineOptionType')
-const gainLossService = require('../controllers/gainLoss')
+const gainLossService = require('./gainLoss')
 const quotesUtil = require('../tradier/getQuotes')
 const ordersUtil = require('../tradier/getOrders')
 const uniqBy = require('lodash/uniqBy')
