@@ -11,7 +11,7 @@ const IncomeTargetSchema = mongoose.Schema({
   },
   scope: {
     type: String,
-    enum: [ 'month', 'year' ],
+    enum: [ 'month', 'year', 'allTime' ],
     required: true,
   },
   stackable: {
