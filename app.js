@@ -32,6 +32,8 @@ app.get('/logs', getLogsController)
 
 app.get('/gain-loss', gainLoss.getGainLossController)
 app.get('/gain-loss-graph', gainLoss.getGainLossGraphController)
+
+// To be retired
 app.get('/position-history-graph', positionGraph.getPositionGraphDataController)
 
 

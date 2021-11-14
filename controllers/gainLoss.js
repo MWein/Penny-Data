@@ -1,15 +1,43 @@
 const gainLossSchema = require('../db_models/gainLossSchema')
+const PositionHistorySchema = require('../db_models/positionHistorySchema')
 const {
   isOption,
   determineOptionTypeFromSymbol
 } = require('../utils/determineOptionType')
 
 
+// Since the gain/loss endpoint for tradier doesn't work in the paper envrionment
+// We need to use the position history table instead
+const _retrieveDataBasedOnEnvironment = async (startDate, endDate) => {
+  //const envrionment = process.env.BASEPATH.includes('sandbox') ? 'np' : 'prod'
+  const envrionment = 'np'
+
+  if (envrionment === 'prod') {
+    const gainLossData = await gainLossSchema
+      .find({ close_date: { $gte: startDate, $lte: endDate } })
+      .sort({ close_date: -1 })
+      .select('-_id -__v -hashId')
+
+    return gainLossData
+  } else {
+    const positionHistoryData = await PositionHistorySchema
+      .find({ acquired: { $gte: startDate, $lte: endDate } })
+      .sort({ acquired: -1 })
+      .select('-_id -__v -hashId')
+
+    // Convert a few keys so the getGainLoss function doesn't shit itself
+    return positionHistoryData.map(x => ({
+      ...x._doc,
+      gain_loss: x.costBasis,
+      close_date: x.acquired,
+    }))
+  }
+}
+
+
+
 const getGainLoss = async (startDate, endDate) => {
-  const gainLossData = await gainLossSchema
-    .find({ close_date: { $gte: startDate, $lte: endDate } })
-    .sort({ close_date: -1 })
-    .select('-_id -__v -hashId')
+  const gainLossData = await _retrieveDataBasedOnEnvironment(startDate, endDate)
 
   const callOptions = gainLossData.filter(gl =>
     determineOptionTypeFromSymbol(gl.symbol) === 'call')
