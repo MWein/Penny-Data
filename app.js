@@ -9,9 +9,10 @@ const { pennyStatusController } = require('./controllers/pennyStatus')
 const { accountSummaryController } = require('./controllers/accountSummary')
 const { getLogsController } = require('./controllers/getLogs')
 const gainLoss = require('./controllers/gainLoss')
-const positionGraph = require('./controllers/positionGraph')
 const settings = require('./controllers/settings')
 const watchlist = require('./controllers/watchlist')
+const { getIncomeTargetsController, createIncomeTargetController } = require('./controllers/incomeTargets')
+
 
 app.use(bodyParser.json())
 app.use(cors())
@@ -33,14 +34,15 @@ app.get('/logs', getLogsController)
 app.get('/gain-loss', gainLoss.getGainLossController)
 app.get('/gain-loss-graph', gainLoss.getGainLossGraphController)
 
-// To be retired
-app.get('/position-history-graph', positionGraph.getPositionGraphDataController)
-
-
 
 // Settings
 app.get('/settings', settings.getSettingsController)
 app.put('/settings', settings.setSettingsController)
+
+
+// Income target endpoints
+app.get('/income-targets', getIncomeTargetsController)
+app.post('/income-targets', createIncomeTargetController)
 
 
 module.exports = app
