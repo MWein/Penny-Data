@@ -11,6 +11,8 @@ const { getLogsController } = require('./controllers/getLogs')
 const gainLoss = require('./controllers/gainLoss')
 const settings = require('./controllers/settings')
 const watchlist = require('./controllers/watchlist')
+const { getIncomeTargetsController, createIncomeTargetController } = require('./controllers/incomeTargets')
+
 
 app.use(bodyParser.json())
 app.use(cors())
@@ -36,6 +38,11 @@ app.get('/gain-loss-graph', gainLoss.getGainLossGraphController)
 // Settings
 app.get('/settings', settings.getSettingsController)
 app.put('/settings', settings.setSettingsController)
+
+
+// Income target endpoints
+app.get('/income-targets', getIncomeTargetsController)
+app.post('/income-targets', createIncomeTargetController)
 
 
 module.exports = app
