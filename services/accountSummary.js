@@ -58,7 +58,10 @@ const accountSummary = async () => {
     const old = acc[key] || { contracts: 0, premium: 0 }
 
     const totalBuyToCloseOrders = buyToCloseOrders
-      .filter(x => x.option_symbol === contract.optionSymbol)
+      .filter(x =>
+        getUnderlying(x.option_symbol) === contract.symbol
+        && contract.type === determineOptionTypeFromSymbol(x.option_symbol)
+      )
       .reduce((acc, x) => acc + x.quantity, 0)
 
     const newContracts = contract.contracts + old.contracts
