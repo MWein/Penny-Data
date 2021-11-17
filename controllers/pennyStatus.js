@@ -9,8 +9,11 @@ const getLastLogDate = async () => {
 
 const pennyStatusController = async (req, res) => {
   try {
-    const logs = await getLastLogDate()
-    res.json(logs)
+    const lastLogDate = await getLastLogDate()
+
+    res.json({
+      lastLogDate
+    })
   } catch (e) {
     res.status(500).send('Error')
   }
