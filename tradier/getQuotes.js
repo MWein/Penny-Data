@@ -2,6 +2,10 @@ const network = require('../utils/network')
 
 
 const getQuotes = async tickers => {
+  if (tickers.length === 0) {
+    return []
+  }
+
   const url = `markets/quotes?symbols=${tickers.join(',')}`
   const response = await network.get(url)
   if (response.quotes === 'null') {
