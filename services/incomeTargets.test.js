@@ -1,6 +1,8 @@
 const gainLossService = require('./gainLoss')
 const incomeTargetSchema = require('../db_models/incomeTargetSchema')
 
+jest.mock('../db_models/incomeTargetSchema')
+
 const {
   _evaluateNonStackableTargets,
   _evaluateStackableTargets,
@@ -127,10 +129,23 @@ describe('_evaluateStackableTargets', () => {
   })
 })
 
+
 describe('incomeTargets', () => {
 
 })
 
+
 describe('createIncomeTarget', () => {
-  
+  it('Creates the new record and saves it to the database', async () => {
+    let saveFunc = jest.fn()
+    incomeTargetSchema.mockReturnValue({
+      save: saveFunc
+    })
+    const mockTarget = {
+      some: 'target'
+    }
+    await createIncomeTarget(mockTarget)
+    expect(incomeTargetSchema).toHaveBeenCalledWith(mockTarget)
+    expect(saveFunc).toHaveBeenCalled()
+  })
 })
