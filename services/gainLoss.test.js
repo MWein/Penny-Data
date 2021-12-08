@@ -1,10 +1,5 @@
 const gainLossSchema = require('../db_models/gainLossSchema')
 const PositionHistorySchema = require('../db_models/positionHistorySchema')
-const {
-  isOption,
-  determineOptionTypeFromSymbol
-} = require('../utils/determineOptionType')
-
 
 const {
   _retrieveDataBasedOnEnvironment,
