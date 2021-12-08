@@ -131,7 +131,75 @@ describe('_evaluateStackableTargets', () => {
 
 
 describe('incomeTargets', () => {
+  let select
 
+  beforeEach(() => {
+    jest.useFakeTimers().setSystemTime(new Date('2021-10-12').getTime())
+    gainLossService.getGainLoss = jest.fn()
+    select = jest.fn()
+    incomeTargetSchema.find = jest.fn().mockReturnValue({
+      select
+    })
+  })
+
+  afterEach(() => {
+    jest.useRealTimers()
+  })
+
+  it('If there are no income targets in the DB, returns empty array', async () => {
+    select.mockReturnValue([])
+    const result = await incomeTargets()
+    expect(result).toEqual([])
+    expect(gainLossService.getGainLoss).not.toHaveBeenCalled()
+  })
+
+  it('Calls gainLossService to get year, month, and allTime values', async () => {
+    select.mockReturnValue(mockTargets)
+    gainLossService.getGainLoss.mockReturnValue({
+      totalGL: 0
+    })
+
+    await incomeTargets()
+
+    expect(gainLossService.getGainLoss).toHaveBeenCalledTimes(3)
+    expect(gainLossService.getGainLoss).toHaveBeenCalledWith(
+      new Date('1970-01-01T00:00:00.000Z'),
+      new Date('2021-10-12T00:00:00.000Z')
+    ) // All Time
+
+    expect(gainLossService.getGainLoss).toHaveBeenCalledWith(
+      new Date('2021-10-01T00:00:00.000Z'),
+      new Date('2021-10-12T00:00:00.000Z')
+    ) // Month
+
+    expect(gainLossService.getGainLoss).toHaveBeenCalledWith(
+      new Date('2021-01-01T00:00:00.000Z'),
+      new Date('2021-10-12T00:00:00.000Z')
+    ) // Year
+  })
+
+  it('Returns evaluated targets', async () => {
+    select.mockReturnValue(mockTargets)
+    gainLossService.getGainLoss.mockReturnValueOnce({ totalGL: 10000 }) // All Time
+    gainLossService.getGainLoss.mockReturnValueOnce({ totalGL: 2000 }) // Month
+    gainLossService.getGainLoss.mockReturnValueOnce({ totalGL: 4000 }) // Year
+
+    const result = await incomeTargets()
+
+    expect(result).toEqual([
+      { left: 0, met: true, name: 'a met target', percentage: 100},
+      { left: 0, met: false, name: 'monthly target', percentage: 100},
+      { left: 0, met: false, name: 'first 10k!', percentage: 100},
+      { left: 496000, met: false, name: 'annual target', percentage: 1},
+      { left: 0, met: true, name: 'somecardpayment', percentage: 100},
+      { left: 0, met: true, name: 'car', percentage: 100},
+      { left: 0, met: true, name: 'something? idk', percentage: 100},
+      { left: 2352, met: false, name: 'student loans', percentage: 41},
+      { left: 10000, met: false, name: 'first 20k!', percentage: 50},
+      { left: 20000, met: false, name: 'next 20k!', percentage: 0},
+      { left: 66400, met: false, name: 'annual gambling binge fund', percentage: 5}
+    ])
+  })
 })
 
 
