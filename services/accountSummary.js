@@ -105,5 +105,7 @@ const accountSummary = async () => {
 
 module.exports = {
   _getCoveredText,
+  _formatOptions,
+  _matchOptionsToBTCOrders,
   accountSummary,
 }
