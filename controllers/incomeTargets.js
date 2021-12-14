@@ -15,7 +15,6 @@ const createIncomeTargetController = async (req, res) => {
     await incomeTargetService.createIncomeTarget(req.body)
     res.status(200).send('Success')
   } catch (e) {
-    console.log(e)
     res.status(500).send('Error')
   }
 }

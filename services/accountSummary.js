@@ -17,6 +17,41 @@ const _getCoveredText = (btcOrders, numPositions) => {
 }
 
 
+const _formatOptions = (options, quotes) =>
+  options.map(option => ({
+    symbol: getUnderlying(option.symbol),
+    optionSymbol: option.symbol,
+    type: determineOptionTypeFromSymbol(option.symbol),
+    contracts: option.quantity * -1,
+    expiration: quotes.find(quote => quote.symbol === option.symbol)?.expiration_date || '2021-01-01',
+    premium: option.cost_basis * -1,
+  }))
+
+
+const _matchOptionsToBTCOrders = (formattedOptions, buyToCloseOrders) =>
+  Object.values(formattedOptions.reduce((acc, contract) => {
+    const key = `${contract.symbol}${contract.type}${contract.expiration}`
+    const old = acc[key] || { contracts: 0, premium: 0 }
+
+    const totalBuyToCloseOrders = buyToCloseOrders
+      .filter(x => contract.optionSymbol === x.option_symbol)
+      .reduce((acc, x) => acc + x.quantity, 0)
+
+    const newContracts = contract.contracts + old.contracts
+
+    return {
+      ...acc,
+      [key]: {
+        ...contract,
+        contracts: newContracts,
+        premium: contract.premium + old.premium,
+        covered: _getCoveredText(totalBuyToCloseOrders, newContracts)
+      }
+    }
+  }, {}))
+    .sort((a, b) => new Date(a.expiration) - new Date(b.expiration))
+
+
 const accountSummary = async () => {
   const today = new Date()
   const firstOfYear = new Date(`${today.getFullYear()}-01-01`)
@@ -44,41 +79,8 @@ const accountSummary = async () => {
 
   const quotes = await quotesUtil.getQuotes(optionsTickers)
 
-  const optionsContracts = Object.values(options.map(pos => {
-    return {
-      symbol: getUnderlying(pos.symbol),
-      optionSymbol: pos.symbol,
-      type: determineOptionTypeFromSymbol(pos.symbol),
-      contracts: pos.quantity * -1,
-      expiration: quotes.find(quote => quote.symbol === pos.symbol)?.expiration_date || '2021-01-01',
-      premium: pos.cost_basis * -1,
-    }
-  }).reduce((acc, contract) => {
-    const key = `${contract.symbol}${contract.type}${contract.expiration}`
-    const old = acc[key] || { contracts: 0, premium: 0 }
-
-    const totalBuyToCloseOrders = buyToCloseOrders
-      .filter(x =>
-        getUnderlying(x.option_symbol) === contract.symbol
-        && contract.type === determineOptionTypeFromSymbol(x.option_symbol)
-      )
-      .reduce((acc, x) => acc + x.quantity, 0)
-
-    const newContracts = contract.contracts + old.contracts
-
-    return {
-      ...acc,
-      [key]: {
-        ...contract,
-        contracts: newContracts,
-        premium: contract.premium + old.premium,
-        covered: _getCoveredText(totalBuyToCloseOrders, newContracts)
-      }
-    }
-  }, {}))
-    .sort((a, b) => {
-      return new Date(a.expiration) - new Date(b.expiration)
-    })
+  const formattedOptions = _formatOptions(options, quotes)
+  const optionsContracts = _matchOptionsToBTCOrders(formattedOptions, buyToCloseOrders)
 
 
   const monthOptionProfit = monthGainLoss.optionGL
@@ -103,5 +105,7 @@ const accountSummary = async () => {
 
 module.exports = {
   _getCoveredText,
+  _formatOptions,
+  _matchOptionsToBTCOrders,
   accountSummary,
 }

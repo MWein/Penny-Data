@@ -21,6 +21,9 @@ const getGainLossGraphController = async (req, res) => {
       startDate.setFullYear(startDate.getFullYear() - 1)
     } else if (timespan === 'month') {
       startDate.setMonth(startDate.getMonth() - 1)
+    } else {
+      res.status(400).send('Invalid timespan')
+      return
     }
 
     const granularity = req.query.granularity || 'day'
@@ -28,7 +31,6 @@ const getGainLossGraphController = async (req, res) => {
     const gainLossGraphData = await gainLossService.gainLossGraph(startDate, new Date(), granularity, optionsOnly)
     res.json(gainLossGraphData)
   } catch (e) {
-    console.log(e)
     res.status(500).send('Error')
   }
 }
