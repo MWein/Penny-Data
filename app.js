@@ -4,14 +4,14 @@ const app = express()
 const bodyParser = require('body-parser')
 const cors = require('cors')
 
-const { pennyStatusController } = require('./controllers/pennyStatus')
+const { pennyStatusController } = require('./src/controllers/pennyStatus')
 
-const { accountSummaryController } = require('./controllers/accountSummary')
-const { getLogsController } = require('./controllers/getLogs')
-const gainLoss = require('./controllers/gainLoss')
-const settings = require('./controllers/settings')
-const watchlist = require('./controllers/watchlist')
-const { getIncomeTargetsController, createIncomeTargetController } = require('./controllers/incomeTargets')
+const { accountSummaryController } = require('./src/controllers/accountSummary')
+const { getLogsController } = require('./src/controllers/getLogs')
+const gainLoss = require('./src/controllers/gainLoss')
+const settings = require('./src/controllers/settings')
+const watchlist = require('./src/controllers/watchlist')
+const { getIncomeTargetsController, createIncomeTargetController } = require('./src/controllers/incomeTargets')
 
 
 app.use(bodyParser.json())
