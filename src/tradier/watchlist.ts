@@ -1,6 +1,6 @@
 import * as networkUtil from '../utils/network'
 
-const getWatchlistSymbols = async () => {
+const getWatchlistSymbols = async () : Promise<String[]> => {
   try {
     const response = await networkUtil.get('watchlists/default')
     const watchlistItems = response.watchlist.items.item

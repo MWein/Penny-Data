@@ -55,7 +55,7 @@ const generatePositionObject = (symbol, quantity=1, type='stock', cost_basis=100
     symbol: _generateSymbol(symbol, type)
   })
 
-module.exports = {
+export {
   _generateSymbol,
   generateOrderObject,
   generatePositionObject,

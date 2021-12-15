@@ -1,6 +1,12 @@
 import * as networkUtil from '../utils/network'
 
-const getBalances = async () => {
+type Balance = {
+  equity: Number,
+  totalCash: Number,
+  optionBuyingPower: Number,
+}
+
+const getBalances = async () : Promise<Balance> => {
   const url = `accounts/${process.env.ACCOUNTNUM}/balances`
   const response = await networkUtil.get(url)
   const balancesObj = response.balances
@@ -17,6 +23,6 @@ const getBalances = async () => {
   }
 }
 
-module.exports = {
+export {
   getBalances
 }
