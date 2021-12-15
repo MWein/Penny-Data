@@ -1,5 +1,5 @@
-const app = require('./app')
-const mongoose = require('mongoose')
+import app from './app'
+import * as mongoose from 'mongoose'
 
 const port = 3001
 
@@ -8,7 +8,7 @@ const port = 3001
 const connectToDB = () => {
   console.log('Connecting to Database')
 
-  mongoose.connect(process.env.CONNECTION_STRING, { useNewUrlParser: true, useUnifiedTopology: true }, err => {
+  mongoose.connect(process.env.CONNECTION_STRING, null, err => {
     if (err) {
       // Not much choice in logging to a database we can't connect to
       console.log('Database Connection Failure - Trying Again')
