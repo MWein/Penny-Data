@@ -1,5 +1,5 @@
 const gainLossService = require('./gainLoss')
-const { incomeTargetModel } = require('../db_models/incomeTargetSchema')
+import { incomeTargetModel } from '../db_models/incomeTargetSchema'
 
 jest.mock('../db_models/incomeTargetSchema')
 

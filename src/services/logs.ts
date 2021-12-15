@@ -5,6 +5,6 @@ const getLogs = async () : Promise<String[]> => {
   return logs
 }
 
-module.exports = {
+export {
   getLogs
 }

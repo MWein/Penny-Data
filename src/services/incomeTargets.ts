@@ -1,5 +1,5 @@
 const gainLossService = require('./gainLoss')
-const { incomeTargetModel } = require('../db_models/incomeTargetSchema')
+import { incomeTargetModel } from '../db_models/incomeTargetSchema'
 
 
 // Since they are not stackable I don't have to mess with the income values
@@ -106,7 +106,7 @@ const createIncomeTarget = async newTarget => {
 }
 
 
-module.exports = {
+export {
   _evaluateNonStackableTargets,
   _evaluateStackableTargets,
   incomeTargets,

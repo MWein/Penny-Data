@@ -1,5 +1,5 @@
-const { logModel } = require('../db_models/logSchema')
-const { getLogs } = require('./logs')
+import { logModel } from '../db_models/logSchema'
+import { getLogs } from './logs'
 
 describe('getLogs', () => {
   it('Gets the logs', async () => {
