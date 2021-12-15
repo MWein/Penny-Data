@@ -12,14 +12,14 @@ Move to Typescript todo list
 [ ] db_models?
 	[ ] gainLossSchema
 	[ ] incomeTargetSchema
-	[ ] logSchema
+	[X] logSchema
 	[ ] positionHistorySchema
 	[ ] settingSchema
 [ ] services
 	[ ] accountSummary
 	[ ] gainLoss
 	[ ] incomeTargets
-	[ ] logs
+	[X] logs
 	[X] pennyStatus
 	[X] settings
 [ ] tradier
