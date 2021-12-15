@@ -1,14 +1,14 @@
-const { settingsModel } = require('../db_models/settingSchema')
+import { settingsModel } from '../db_models/settingSchema'
 
 type Settings = {
-  callsEnabled: Boolean,
-  putsEnabled: Boolean,
-  maxAllocation: Number,
-  maxPositions: Number,
-  reserve: Number,
-  buyToCloseAmount: Number,
-  customTickers: Array<String>,
-  bannedTickers: Array<String>,
+  callsEnabled?: Boolean,
+  putsEnabled?: Boolean,
+  maxAllocation?: Number,
+  maxPositions?: Number,
+  reserve?: Number,
+  buyToCloseAmount?: Number,
+  customTickers?: Array<String>,
+  bannedTickers?: Array<String>,
 }
 
 const defaultSettings: Settings = {

@@ -1,10 +1,10 @@
-const { settingsModel } = require('../db_models/settingSchema')
+import { settingsModel } from '../db_models/settingSchema'
 
-const {
+import {
   defaultSettings,
   getSettings,
   setSettings,
-} = require('./settings')
+} from './settings'
 
 
 describe('getSettings', () => {
@@ -13,13 +13,13 @@ describe('getSettings', () => {
   })
 
   it('Returns all default settings if find returns nothing', async () => {
-    settingsModel.find.mockReturnValue([])
+    (settingsModel.find as unknown as jest.Mock).mockReturnValue([])
     const settings = await getSettings()
     expect(settings).toEqual(defaultSettings)
   })
 
   it('Returns settings intermixed with default settings', async () => {
-    settingsModel.find.mockReturnValue([
+    (settingsModel.find as unknown as jest.Mock).mockReturnValue([
       {
         key: 'putsEnabled',
         value: false
@@ -45,17 +45,17 @@ describe('setSettings', () => {
   })
 
   it('If empty object, just returns settings', async () => {
-    settingsModel.find.mockReturnValue([])
+    (settingsModel.find as unknown as jest.Mock).mockReturnValue([])
     const newSettings = await setSettings({})
     expect(newSettings).toEqual(defaultSettings)
     expect(settingsModel.findOneAndUpdate).not.toHaveBeenCalled()
   })
 
   it('Updates for each setting updated', async () => {
-    settingsModel.find.mockReturnValue([])
+    (settingsModel.find as unknown as jest.Mock).mockReturnValue([])
     const newSettings = await setSettings({
-      hello: 'newSetting',
-      goodbye: 'anothernewSetting',
+      callsEnabled: false,
+      customTickers: [ 'tiiiicker' ],
       putsEnabled: true,
       reserve: -100
     })
@@ -63,13 +63,13 @@ describe('setSettings', () => {
     expect(settingsModel.findOneAndUpdate).toHaveBeenCalledTimes(4)
 
     expect(settingsModel.findOneAndUpdate).toHaveBeenCalledWith(
-      { key: 'hello' },
-      { key: 'hello', value: 'newSetting' },
+      { key: 'callsEnabled' },
+      { key: 'callsEnabled', value: false },
       { upsert: true }
     )
     expect(settingsModel.findOneAndUpdate).toHaveBeenCalledWith(
-      { key: 'goodbye' },
-      { key: 'goodbye', value: 'anothernewSetting' },
+      { key: 'customTickers' },
+      { key: 'customTickers', value: [ 'tiiiicker' ] },
       { upsert: true }
     )
     expect(settingsModel.findOneAndUpdate).toHaveBeenCalledWith(

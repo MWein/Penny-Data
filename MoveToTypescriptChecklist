@@ -9,12 +9,6 @@ Move to Typescript todo list
 	[ ] pennyStatus
 	[ ] settings
 	[ ] watchlist
-[X] db_models?
-	[X] gainLossSchema
-	[X] incomeTargetSchema
-	[X] logSchema
-	[X] positionHistorySchema
-	[X] settingSchema
 [ ] services
 	[ ] accountSummary
 	[ ] gainLoss
@@ -28,9 +22,3 @@ Move to Typescript todo list
 	[ ] getPositions
 	[ ] getQuotes
 	[X] watchlist
-[X] utils
-	[X] determineOptionType
-	[X] network
-	[X] testHelpers
-[X] app.js
-[X] server.js
