@@ -1,3 +1,5 @@
+export {}
+
 const balancesUtil = require('../tradier/getBalances')
 const positionUtil = require('../tradier/getPositions')
 const { isOption, determineOptionTypeFromSymbol, getUnderlying } = require('../utils/determineOptionType')
@@ -5,6 +7,17 @@ const gainLossService = require('./gainLoss')
 const quotesUtil = require('../tradier/getQuotes')
 const ordersUtil = require('../tradier/getOrders')
 const uniqBy = require('lodash/uniqBy')
+
+
+type OptionContract = {
+  symbol: string,
+  optionSymbol: string,
+  type: string,
+  contracts: number,
+  expiration: string,
+  premium: number,
+  covered?: string
+}
 
 
 const _getCoveredText = (btcOrders, numPositions) => {
@@ -17,7 +30,7 @@ const _getCoveredText = (btcOrders, numPositions) => {
 }
 
 
-const _formatOptions = (options, quotes) =>
+const _formatOptions = (options, quotes) : OptionContract[] =>
   options.map(option => ({
     symbol: getUnderlying(option.symbol),
     optionSymbol: option.symbol,
@@ -49,7 +62,7 @@ const _matchOptionsToBTCOrders = (formattedOptions, buyToCloseOrders) =>
       }
     }
   }, {}))
-    .sort((a, b) => new Date(a.expiration) - new Date(b.expiration))
+    .sort((a: OptionContract, b: OptionContract) => new Date(a.expiration).valueOf() - new Date(b.expiration).valueOf())
 
 
 const accountSummary = async () => {

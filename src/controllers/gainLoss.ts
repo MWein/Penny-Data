@@ -1,3 +1,5 @@
+export {}
+
 const gainLossService = require('../services/gainLoss')
 
 
