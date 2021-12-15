@@ -1,4 +1,4 @@
-const { logModel } = require('../db_models/logSchema')
+import { logModel } from '../db_models/logSchema'
 
 
 const getLastLogDate = async () : Promise<String> => {
@@ -7,6 +7,6 @@ const getLastLogDate = async () : Promise<String> => {
 }
 
 
-module.exports = {
+export {
   getLastLogDate
 }

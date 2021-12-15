@@ -1,5 +1,5 @@
-const { logModel } = require('../db_models/logSchema')
-const { getLastLogDate } = require('./pennyStatus')
+import { logModel } from '../db_models/logSchema'
+import { getLastLogDate } from './pennyStatus'
 
 describe('getLastLogDate', () => {
   it('Gets the last log date', async () => {
