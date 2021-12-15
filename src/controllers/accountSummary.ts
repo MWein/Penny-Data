@@ -1,4 +1,4 @@
-const accountSummaryUtil = require('../services/accountSummary')
+import * as accountSummaryUtil from '../services/accountSummary'
 
 
 const accountSummaryController = async (req, res) : Promise<void> => {

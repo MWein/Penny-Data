@@ -1,15 +1,25 @@
+/*
+  For some unknown reason, changing this to typescript screwed up the jest-mock/express imports
+  They were left as a const, changed to an import, nothing worked.
+  The problem was that getMockReq threw as not being a function
+  This was despite a console.log of getMockReq both invoked and typeof'ed returning FUNCTION
+  I spent 2 hours on this and for some goddam reason, changing it back to javascript fixed it
+  I'm drinking right now
+*/
+
+
 const gainLossService = require('../services/gainLoss')
 const {
   getGainLossController,
   getGainLossGraphController,
 } = require('./gainLoss')
-import { getMockReq, getMockRes } from '@jest-mock/express'
+const { getMockReq, getMockRes } = require('@jest-mock/express')
 
 
 describe('getGainLossController', () => {
-  let req
-  let res
-  
+  var req
+  var res
+
   beforeEach(async () => {
     gainLossService.getGainLoss = jest.fn()
     const mockRes = getMockRes()
@@ -27,14 +37,20 @@ describe('getGainLossController', () => {
   })
 
   it('Happy path, start and end dates provided', async () => {
-    req = getMockReq({
+    console.log('THIS IS A GODDAM FUCKING FUCTON', getMockReq({
+      query: {
+        startDate: '2021-01-01',
+        endDate: '2021-01-07',
+      }
+    }))
+    const reqWithDates = getMockReq({
       query: {
         startDate: '2021-01-01',
         endDate: '2021-01-07',
       }
     })
     gainLossService.getGainLoss.mockReturnValue('doesntmatter')
-    await getGainLossController(req, res)
+    await getGainLossController(reqWithDates, res)
     expect(gainLossService.getGainLoss).toHaveBeenCalledWith(
       new Date('2021-01-01T00:00:00.000Z'),
       new Date('2021-01-07T00:00:00.000Z')

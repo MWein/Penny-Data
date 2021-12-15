@@ -1,5 +1,5 @@
-const accountSummaryUtil = require('../services/accountSummary')
-const { accountSummaryController } = require('./accountSummary')
+import * as accountSummaryUtil from '../services/accountSummary'
+import { accountSummaryController } from './accountSummary'
 import { getMockReq, getMockRes } from '@jest-mock/express'
 
 
@@ -8,14 +8,14 @@ describe('accountSummaryController', () => {
   let res
 
   beforeEach(async () => {
-    accountSummaryUtil.accountSummary = jest.fn()
+    (accountSummaryUtil.accountSummary as unknown as jest.Mock) = jest.fn()
     const mockRes = getMockRes()
     req = getMockReq()
     res = mockRes.res
   })
 
   it('Returns 500 error if something fails', async () => {
-    accountSummaryUtil.accountSummary.mockImplementation(() => {
+    (accountSummaryUtil.accountSummary as unknown as jest.Mock).mockImplementation(() => {
       throw new Error('OH NOOOOO!!!')
     })
     await accountSummaryController(req, res)
@@ -24,7 +24,7 @@ describe('accountSummaryController', () => {
   })
 
   it('Happy path', async () => {
-    accountSummaryUtil.accountSummary.mockReturnValue({
+    (accountSummaryUtil.accountSummary as unknown as jest.Mock).mockReturnValue({
       something: 'whatever'
     })
     await accountSummaryController(req, res)

@@ -1,6 +1,4 @@
-export {}
-
-const gainLossService = require('../services/gainLoss')
+import * as gainLossService from '../services/gainLoss'
 
 
 const getGainLossController = async (req, res) : Promise<void> => {
