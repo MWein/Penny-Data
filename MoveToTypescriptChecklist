@@ -22,3 +22,6 @@ Move to Typescript todo list
 	[ ] getPositions
 	[ ] getQuotes
 	[X] watchlist
+
+
+[ ] Make all tests JS again. Not worth it.
