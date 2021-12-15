@@ -4,9 +4,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "nodemon server.js",
-    "start": "node server.js",
-    "test": "jest --coverage"
+    "dev": "nodemon ./src/server.js",
+    "start": "node ./src/server.js",
+    "test": "jest --coverage",
+    "build": "tsc"
   },
   "repository": {
     "type": "git",
@@ -30,10 +31,15 @@
     "superagent": "^6.1.0"
   },
   "devDependencies": {
-    "jest": "^27.3.1",
+    "@babel/core": "^7.16.5",
+    "@babel/preset-env": "^7.16.5",
+    "@babel/preset-typescript": "^7.16.5",
+    "@jest-mock/express": "1.4.5",
+    "@types/jest": "^27.0.3",
+    "babel-jest": "^27.4.5",
     "eslint": "^8.1.0",
     "eslint-plugin-jest": "^25.2.2",
-    "nodemon": "^2.0.14",
-    "@jest-mock/express": "1.4.5"
+    "jest": "^27.3.1",
+    "nodemon": "^2.0.14"
   }
 }

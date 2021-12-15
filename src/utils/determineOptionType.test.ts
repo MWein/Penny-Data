@@ -4,6 +4,7 @@ const {
   getUnderlying,
 } = require('./determineOptionType')
 
+
 describe('determineOptionTypeFromSymbol', () => {
   it('Properly identifies AAPL211029C00146000 as call', () => {
     expect(determineOptionTypeFromSymbol('AAPL211029C00146000')).toEqual('call')
