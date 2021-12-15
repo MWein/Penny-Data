@@ -1,9 +1,9 @@
-const { gainLossModel } = require('../db_models/gainLossSchema')
-const { positionHistoryModel } = require('../db_models/positionHistorySchema')
-const {
+import { gainLossModel } from '../db_models/gainLossSchema'
+import { positionHistoryModel } from '../db_models/positionHistorySchema'
+import {
   isOption,
   determineOptionTypeFromSymbol
-} = require('../utils/determineOptionType')
+} from '../utils/determineOptionType'
 
 
 // Since the gain/loss endpoint for tradier doesn't work in the paper envrionment
@@ -111,7 +111,7 @@ const gainLossGraph = async (startDate, endDate, granularity, optionsOnly) => {
 }
 
 
-module.exports = {
+export {
   _retrieveDataBasedOnEnvironment,
   getGainLoss,
   gainLossGraph,

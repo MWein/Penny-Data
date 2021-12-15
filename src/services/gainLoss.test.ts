@@ -1,5 +1,5 @@
-const { gainLossModel } = require('../db_models/gainLossSchema')
-const { positionHistoryModel } = require('../db_models/positionHistorySchema')
+import { gainLossModel } from '../db_models/gainLossSchema'
+import { positionHistoryModel } from '../db_models/positionHistorySchema'
 
 const {
   _retrieveDataBasedOnEnvironment,

@@ -1,4 +1,4 @@
-const gainLossService = require('./gainLoss')
+import * as gainLossService from './gainLoss'
 import { incomeTargetModel } from '../db_models/incomeTargetSchema'
 
 
