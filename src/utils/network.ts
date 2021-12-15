@@ -55,7 +55,7 @@ const post = async (path, body) => {
   return response.body
 }
 
-module.exports = {
+export {
   _createFormString,
   get,
   post,

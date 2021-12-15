@@ -1,8 +1,8 @@
-const network = require('../utils/network')
+import * as networkUtil from '../utils/network'
 
 const getBalances = async () => {
   const url = `accounts/${process.env.ACCOUNTNUM}/balances`
-  const response = await network.get(url)
+  const response = await networkUtil.get(url)
   const balancesObj = response.balances
 
   // Nonprod is a margin account, prod is cash

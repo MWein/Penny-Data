@@ -1,9 +1,9 @@
-const network = require('../utils/network')
-
+//const networkUtil = require('../utils/network')
+import * as networkUtil from '../utils/network'
 
 const getPositions = async () => {
   const url = `accounts/${process.env.ACCOUNTNUM}/positions`
-  const response = await network.get(url)
+  const response = await networkUtil.get(url)
   if (response.positions === 'null') {
     return []
   }

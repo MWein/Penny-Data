@@ -1,6 +1,5 @@
-const network = require('../utils/network')
+import * as networkUtil from '../utils/network'
 const {
-  isOption,
   determineOptionTypeFromSymbol
 } = require('../utils/determineOptionType')
 
@@ -32,7 +31,7 @@ const filterForOptionBuyToCloseOrders = orders =>
 
 const getOrders = async () => {
   const url = `accounts/${process.env.ACCOUNTNUM}/orders`
-  const response = await network.get(url)
+  const response = await networkUtil.get(url)
   if (response.orders === 'null') {
     return []
   }

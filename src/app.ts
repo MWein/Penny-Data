@@ -45,4 +45,4 @@ app.get('/income-targets', getIncomeTargetsController)
 app.post('/income-targets', createIncomeTargetController)
 
 
-module.exports = app
+export = app

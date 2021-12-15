@@ -1,4 +1,4 @@
-const network = require('../utils/network')
+import * as networkUtil from '../utils/network'
 
 
 const getQuotes = async tickers => {
@@ -7,7 +7,7 @@ const getQuotes = async tickers => {
   }
 
   const url = `markets/quotes?symbols=${tickers.join(',')}`
-  const response = await network.get(url)
+  const response = await networkUtil.get(url)
   if (response.quotes === 'null') {
     return []
   }
