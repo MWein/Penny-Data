@@ -15,6 +15,6 @@ const getPositions = async () => {
 }
 
 
-module.exports = {
+export {
   getPositions,
 }

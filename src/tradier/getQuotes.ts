@@ -19,6 +19,6 @@ const getQuotes = async tickers => {
 }
 
 
-module.exports = {
+export {
   getQuotes,
 }

@@ -42,7 +42,7 @@ const getOrders = async () => {
   }
 }
 
-module.exports = {
+export {
   filterForCoveredCallOrders,
   filterForCashSecuredPutOrders,
   filterForOptionBuyToCloseOrders,

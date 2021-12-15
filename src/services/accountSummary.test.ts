@@ -1,10 +1,9 @@
-const balancesUtil = require('../tradier/getBalances')
-const positionUtil = require('../tradier/getPositions')
-const { isOption, determineOptionTypeFromSymbol, getUnderlying } = require('../utils/determineOptionType')
-const gainLossService = require('./gainLoss')
-const quotesUtil = require('../tradier/getQuotes')
-const ordersUtil = require('../tradier/getOrders')
-const uniqBy = require('lodash/uniqBy')
+import * as balancesUtil from '../tradier/getBalances'
+import * as  positionUtil from '../tradier/getPositions'
+import { isOption, determineOptionTypeFromSymbol, getUnderlying } from '../utils/determineOptionType'
+import * as  gainLossService from './gainLoss'
+import * as  quotesUtil from '../tradier/getQuotes'
+import * as  ordersUtil from '../tradier/getOrders'
 
 const {
   _getCoveredText,

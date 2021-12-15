@@ -16,6 +16,6 @@ const getWatchlistSymbols = async () : Promise<String[]> => {
   }
 }
 
-module.exports = {
+export {
   getWatchlistSymbols
 }
