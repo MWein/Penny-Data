@@ -32,5 +32,5 @@ Move to Typescript todo list
 	[X] determineOptionType
 	[X] network
 	[X] testHelpers
-[ ] app.js
-[ ] server.js
+[X] app.js
+[X] server.js
