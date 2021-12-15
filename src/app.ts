@@ -7,7 +7,7 @@ import { pennyStatusController } from './controllers/pennyStatus'
 const { accountSummaryController } = require('./controllers/accountSummary')
 import { getLogsController } from './controllers/getLogs'
 const gainLoss = require('./controllers/gainLoss')
-const settings = require('./controllers/settings')
+import { getSettingsController, setSettingsController } from './controllers/settings'
 const watchlist = require('./controllers/watchlist')
 const { getIncomeTargetsController, createIncomeTargetController } = require('./controllers/incomeTargets')
 
@@ -37,8 +37,8 @@ app.get('/gain-loss-graph', gainLoss.getGainLossGraphController)
 
 
 // Settings
-app.get('/settings', settings.getSettingsController)
-app.put('/settings', settings.setSettingsController)
+app.get('/settings', getSettingsController)
+app.put('/settings', setSettingsController)
 
 
 // Income target endpoints

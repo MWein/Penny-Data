@@ -21,7 +21,7 @@ const setSettingsController = async (req, res) : Promise<void> => {
 }
 
 
-module.exports = {
+export {
   getSettingsController,
   setSettingsController,
 }
