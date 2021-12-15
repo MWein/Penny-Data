@@ -1,14 +1,14 @@
 Move to Typescript todo list
 
 
-[ ] controllers
-	[ ] accountSummary
-	[ ] gainLoss
-	[ ] getLogs
-	[ ] incomeTargets
-	[ ] pennyStatus
-	[ ] settings
-	[ ] watchlist
+[X] controllers
+	[X] accountSummary
+	[X] gainLoss
+	[X] getLogs
+	[X] incomeTargets
+	[X] pennyStatus
+	[X] settings
+	[X] watchlist
 [X] db_models?
 	[X] gainLossSchema
 	[X] incomeTargetSchema
