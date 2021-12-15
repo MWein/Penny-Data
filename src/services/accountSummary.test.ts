@@ -5,12 +5,12 @@ import * as  gainLossService from './gainLoss'
 import * as  quotesUtil from '../tradier/getQuotes'
 import * as  ordersUtil from '../tradier/getOrders'
 
-const {
+import {
   _getCoveredText,
   _formatOptions,
   _matchOptionsToBTCOrders,
   accountSummary,
-} = require('./accountSummary')
+} from './accountSummary'
 
 
 describe('_getCoveredText', () => {

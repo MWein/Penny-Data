@@ -1,8 +1,8 @@
-const incomeTargetService = require('../services/incomeTargets')
-const {
+import * as incomeTargetService from '../services/incomeTargets'
+import {
   getIncomeTargetsController,
   createIncomeTargetController
-} = require('./incomeTargets')
+} from './incomeTargets'
 import { getMockReq, getMockRes } from '@jest-mock/express'
 
 
@@ -11,14 +11,14 @@ describe('getIncomeTargetsController', () => {
   let res
   
   beforeEach(async () => {
-    incomeTargetService.incomeTargets = jest.fn()
+    (incomeTargetService.incomeTargets as unknown as jest.Mock) = jest.fn()
     const mockRes = getMockRes()
     req = getMockReq()
     res = mockRes.res
   })
 
   it('Returns 500 error if something fails', async () => {
-    incomeTargetService.incomeTargets.mockImplementation(() => {
+    (incomeTargetService.incomeTargets as unknown as jest.Mock).mockImplementation(() => {
       throw new Error('OH NOOOOO!!!')
     })
     await getIncomeTargetsController(req, res)
@@ -27,7 +27,7 @@ describe('getIncomeTargetsController', () => {
   })
 
   it('Happy path', async () => {
-    incomeTargetService.incomeTargets.mockReturnValue({
+    (incomeTargetService.incomeTargets as unknown as jest.Mock).mockReturnValue({
       something: 'whatever'
     })
     await getIncomeTargetsController(req, res)
@@ -43,14 +43,14 @@ describe('createIncomeTargetController', () => {
   let res
   
   beforeEach(async () => {
-    incomeTargetService.createIncomeTarget = jest.fn()
+    (incomeTargetService.createIncomeTarget as unknown as jest.Mock) = jest.fn()
     const mockRes = getMockRes()
     req = getMockReq({ body: { some: 'incomeTarget' } })
     res = mockRes.res
   })
 
   it('Returns 500 error if something fails', async () => {
-    incomeTargetService.createIncomeTarget.mockImplementation(() => {
+    (incomeTargetService.createIncomeTarget as unknown as jest.Mock).mockImplementation(() => {
       throw new Error('OH NOOOOO!!!')
     })
     await createIncomeTargetController(req, res)

@@ -1,4 +1,4 @@
-const settingsService = require('../services/settings')
+import * as settingsService from '../services/settings'
 
 
 const getSettingsController = async (req, res) : Promise<void> => {

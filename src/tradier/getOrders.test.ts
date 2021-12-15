@@ -1,11 +1,11 @@
-const network = require('../utils/network')
-const {
+import * as network from '../utils/network'
+import {
   filterForCoveredCallOrders,
   filterForCashSecuredPutOrders,
   filterForOptionBuyToCloseOrders,
   getOrders,
-} = require('./getOrders')
-const { generateOrderObject } = require('../utils/testHelpers')
+} from './getOrders'
+import { generateOrderObject } from '../utils/testHelpers'
 
 
 describe('Order filter functions', () => {

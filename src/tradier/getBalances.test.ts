@@ -1,5 +1,5 @@
-const network = require('../utils/network')
-const { getBalances } = require('./getBalances')
+import * as network from '../utils/network'
+import { getBalances } from './getBalances'
 
 describe('getBalances', () => {
   it('Returns balances in the right format', async () => {

@@ -3,12 +3,12 @@ import { incomeTargetModel } from '../db_models/incomeTargetSchema'
 
 jest.mock('../db_models/incomeTargetSchema')
 
-const {
+import {
   _evaluateNonStackableTargets,
   _evaluateStackableTargets,
   incomeTargets,
   createIncomeTarget
-} = require('./incomeTargets')
+} from './incomeTargets'
 
 
 const mockTargets = [

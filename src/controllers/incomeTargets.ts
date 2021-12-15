@@ -1,4 +1,4 @@
-const incomeTargetService = require('../services/incomeTargets')
+import * as incomeTargetService from '../services/incomeTargets'
 
 
 const getIncomeTargetsController = async (req, res) : Promise<void> => {

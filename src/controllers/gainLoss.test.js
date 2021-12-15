@@ -37,12 +37,6 @@ describe('getGainLossController', () => {
   })
 
   it('Happy path, start and end dates provided', async () => {
-    console.log('THIS IS A GODDAM FUCKING FUCTON', getMockReq({
-      query: {
-        startDate: '2021-01-01',
-        endDate: '2021-01-07',
-      }
-    }))
     const reqWithDates = getMockReq({
       query: {
         startDate: '2021-01-01',

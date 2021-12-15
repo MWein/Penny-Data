@@ -1,8 +1,8 @@
-const settingsService = require('../services/settings')
-const {
+import * as settingsService from '../services/settings'
+import {
   getSettingsController,
   setSettingsController,
-} = require('./settings')
+} from './settings'
 import { getMockReq, getMockRes } from '@jest-mock/express'
 
 
@@ -11,14 +11,14 @@ describe('getSettingsController', () => {
   let res
   
   beforeEach(async () => {
-    settingsService.getSettings = jest.fn()
+    (settingsService.getSettings as unknown as jest.Mock) = jest.fn()
     const mockRes = getMockRes()
     req = getMockReq()
     res = mockRes.res
   })
 
   it('Returns 500 error if something fails', async () => {
-    settingsService.getSettings.mockImplementation(() => {
+    (settingsService.getSettings as unknown as jest.Mock).mockImplementation(() => {
       throw new Error('OH NOOOOO!!!')
     })
     await getSettingsController(req, res)
@@ -27,7 +27,7 @@ describe('getSettingsController', () => {
   })
 
   it('Happy path', async () => {
-    settingsService.getSettings.mockReturnValue({
+    (settingsService.getSettings as unknown as jest.Mock).mockReturnValue({
       something: 'whatever'
     })
     await getSettingsController(req, res)
@@ -43,14 +43,14 @@ describe('setSettingsController', () => {
   let res
   
   beforeEach(async () => {
-    settingsService.setSettings = jest.fn()
+    (settingsService.setSettings as unknown as jest.Mock) = jest.fn()
     const mockRes = getMockRes()
     req = getMockReq({ body: { some: 'newSetting' } })
     res = mockRes.res
   })
 
   it('Returns 500 error if something fails', async () => {
-    settingsService.setSettings.mockImplementation(() => {
+    (settingsService.setSettings as unknown as jest.Mock).mockImplementation(() => {
       throw new Error('OH NOOOOO!!!')
     })
     await setSettingsController(req, res)
@@ -59,7 +59,7 @@ describe('setSettingsController', () => {
   })
 
   it('Happy path, edits setting from request body', async () => {
-    settingsService.setSettings.mockReturnValue({
+    (settingsService.setSettings as unknown as jest.Mock).mockReturnValue({
       thisIs: 'whatgetssenttotheuser'
     })
     await setSettingsController(req, res)

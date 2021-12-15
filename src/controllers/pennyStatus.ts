@@ -1,4 +1,4 @@
-const pennyStatusUtil = require('../services/pennyStatus')
+import * as pennyStatusUtil from '../services/pennyStatus'
 
 
 const pennyStatusController = async (req, res) : Promise<void> => {

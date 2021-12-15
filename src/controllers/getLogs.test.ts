@@ -1,5 +1,5 @@
-const logService = require('../services/logs')
-const { getLogsController } = require('./getLogs')
+import * as logService from '../services/logs'
+import { getLogsController } from './getLogs'
 import { getMockReq, getMockRes } from '@jest-mock/express'
 
 
@@ -8,14 +8,14 @@ describe('getLogsController', () => {
   let res
 
   beforeEach(async () => {
-    logService.getLogs = jest.fn()
+    (logService.getLogs as unknown as jest.Mock) = jest.fn()
     const mockRes = getMockRes()
     req = getMockReq()
     res = mockRes.res
   })
 
   it('Returns 500 error if something fails', async () => {
-    logService.getLogs.mockImplementation(() => {
+    (logService.getLogs as unknown as jest.Mock).mockImplementation(() => {
       throw new Error('OH NOOOOO!!!')
     })
     await getLogsController(req, res)
@@ -24,7 +24,7 @@ describe('getLogsController', () => {
   })
 
   it('Happy path', async () => {
-    logService.getLogs.mockReturnValue({
+    (logService.getLogs as unknown as jest.Mock).mockReturnValue({
       something: 'whatever'
     })
     await getLogsController(req, res)

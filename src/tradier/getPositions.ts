@@ -1,4 +1,3 @@
-//const networkUtil = require('../utils/network')
 import * as networkUtil from '../utils/network'
 
 const getPositions = async () => {

@@ -1,8 +1,8 @@
-const network = require('../utils/network')
-const {
+import * as network from '../utils/network'
+import {
   getPositions,
-} = require('./getPositions')
-const { generatePositionObject } = require('../utils/testHelpers')
+} from './getPositions'
+import { generatePositionObject } from '../utils/testHelpers'
 
 
 

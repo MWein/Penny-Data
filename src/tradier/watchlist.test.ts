@@ -1,7 +1,7 @@
-const network = require('../utils/network')
-const {
+import * as network from '../utils/network'
+import {
   getWatchlistSymbols
-} = require('./watchlist')
+} from './watchlist'
 
 describe('getWatchlistSymbols', () => {
   beforeEach(() => {

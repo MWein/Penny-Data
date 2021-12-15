@@ -1,4 +1,4 @@
-const watchlistUtil = require('../tradier/watchlist')
+import * as watchlistUtil from '../tradier/watchlist'
 
 const getWatchlistController = async (req, res) : Promise<void> => {
   try {

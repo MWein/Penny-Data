@@ -1,11 +1,11 @@
 import { gainLossModel } from '../db_models/gainLossSchema'
 import { positionHistoryModel } from '../db_models/positionHistorySchema'
 
-const {
+import {
   _retrieveDataBasedOnEnvironment,
   getGainLoss,
   gainLossGraph,
-} = require('./gainLoss')
+} from './gainLoss'
 
 
 describe('_retrieveDataBasedOnEnvironment', () => {

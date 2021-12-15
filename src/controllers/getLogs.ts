@@ -1,4 +1,4 @@
-const logService = require('../services/logs')
+import * as logService from '../services/logs'
 
 const getLogsController = async (req, res) : Promise<void> => {
   try {
