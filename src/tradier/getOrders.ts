@@ -1,7 +1,7 @@
 import * as networkUtil from '../utils/network'
-const {
+import {
   determineOptionTypeFromSymbol
-} = require('../utils/determineOptionType')
+} from '../utils/determineOptionType'
 
 const filterForCoveredCallOrders = orders =>
   orders.filter(ord =>
