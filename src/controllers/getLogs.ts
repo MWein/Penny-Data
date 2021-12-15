@@ -1,6 +1,6 @@
 const logService = require('../services/logs')
 
-const getLogsController = async (req, res) => {
+const getLogsController = async (req, res) : Promise<void> => {
   try {
     const logs = await logService.getLogs()
     res.json(logs)

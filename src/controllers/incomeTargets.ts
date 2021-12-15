@@ -1,7 +1,7 @@
 const incomeTargetService = require('../services/incomeTargets')
 
 
-const getIncomeTargetsController = async (req, res) => {
+const getIncomeTargetsController = async (req, res) : Promise<void> => {
   try {
     const targets = await incomeTargetService.incomeTargets()
     res.json(targets)
@@ -10,7 +10,7 @@ const getIncomeTargetsController = async (req, res) => {
   }
 }
 
-const createIncomeTargetController = async (req, res) => {
+const createIncomeTargetController = async (req, res) : Promise<void> => {
   try {
     await incomeTargetService.createIncomeTarget(req.body)
     res.status(200).send('Success')

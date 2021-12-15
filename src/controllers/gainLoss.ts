@@ -1,7 +1,7 @@
 const gainLossService = require('../services/gainLoss')
 
 
-const getGainLossController = async (req, res) => {
+const getGainLossController = async (req, res) : Promise<void> => {
   try {
     const startDate = req.query.startDate ? new Date(req.query.startDate) : new Date(0) // Beginning of time
     const endDate = req.query.endDate ? new Date(req.query.endDate) : new Date() // Today
@@ -12,7 +12,7 @@ const getGainLossController = async (req, res) => {
   }
 }
 
-const getGainLossGraphController = async (req, res) => {
+const getGainLossGraphController = async (req, res) : Promise<void> => {
   try {
     const timespan = req.query.timespan || 'year'
 

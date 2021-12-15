@@ -1,7 +1,7 @@
 const settingsService = require('../services/settings')
 
 
-const getSettingsController = async (req, res) => {
+const getSettingsController = async (req, res) : Promise<void> => {
   try {
     const settings = await settingsService.getSettings()
     res.json(settings)
@@ -11,7 +11,7 @@ const getSettingsController = async (req, res) => {
 }
 
 
-const setSettingsController = async (req, res) => {
+const setSettingsController = async (req, res) : Promise<void> => {
   try {
     const newSettings = await settingsService.setSettings(req.body)
     res.json(newSettings)

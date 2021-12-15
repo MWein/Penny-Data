@@ -1,6 +1,6 @@
 const watchlistUtil = require('../tradier/watchlist')
 
-const getWatchlistController = async (req, res) => {
+const getWatchlistController = async (req, res) : Promise<void> => {
   try {
     const watchlist = await watchlistUtil.getWatchlistSymbols()
     res.json(watchlist)

@@ -1,7 +1,7 @@
 const accountSummaryUtil = require('../services/accountSummary')
 
 
-const accountSummaryController = async (req, res) => {
+const accountSummaryController = async (req, res) : Promise<void> => {
   try {
     const summary = await accountSummaryUtil.accountSummary()
     res.json(summary)
