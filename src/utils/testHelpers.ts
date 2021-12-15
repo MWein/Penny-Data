@@ -2,11 +2,40 @@
 
 type EquityType = 'stock' | 'call' | 'put'
 type OrderSide = 'sell_to_open'
+type OrderClass = 'option' | 'equity'
+
+type MockOrderObject = {
+  id: number,
+  type: string,
+  symbol: string,
+  side: OrderSide,
+  quantity: number,
+  status: string,
+  duration: string,
+  avg_fill_price: number,
+  exec_quantity: number,
+  last_fill_price: number,
+  last_fill_quantity: number,
+  remaining_quantity: number,
+  create_date: string,
+  transaction_date: string,
+  class: OrderClass,
+  option_symbol?: string,
+}
+
+type MockPositionObject = {
+  cost_basis: number,
+  date_acquired: string,
+  id: number,
+  quantity: number,
+  symbol: string,
+}
+
 
 const _generateSymbol = (
-    symbol: String,
+    symbol: string,
     type: EquityType
-  ) : String => {
+  ) : string => {
   switch (type) {
   case 'stock':
     return symbol
@@ -19,14 +48,14 @@ const _generateSymbol = (
 
 
 const generateOrderObject = (
-    symbol: String,
-    quantity: Number = 1,
+    symbol: string,
+    quantity: number = 1,
     type: EquityType = 'stock',
     side: OrderSide = 'sell_to_open',
-    status: String ='pending',
-    id: Number = 123456
-  ) => {
-  const ordClass = type === 'call' || type === 'put' ? 'option' : 'equity'
+    status: string ='pending',
+    id: number = 123456
+  ) : MockOrderObject => {
+  const ordClass: OrderClass = type === 'call' || type === 'put' ? 'option' : 'equity'
 
   const orderObj = {
     id,
@@ -59,13 +88,13 @@ const generateOrderObject = (
 
 
 const generatePositionObject = (
-    symbol: String,
-    quantity: Number = 1,
+    symbol: string,
+    quantity: number = 1,
     type: EquityType ='stock',
-    cost_basis: Number = 100,
-    date_acquired: String = '2019-01-31T17:05',
-    id: Number = 123456
-  ) =>
+    cost_basis: number = 100,
+    date_acquired: string = '2019-01-31T17:05',
+    id: number = 123456
+  ) : MockPositionObject =>
   ({
     cost_basis,
     date_acquired,
