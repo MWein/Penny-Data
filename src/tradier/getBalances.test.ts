@@ -3,7 +3,7 @@ import { getBalances } from './getBalances'
 
 describe('getBalances', () => {
   it('Returns balances in the right format', async () => {
-    network.get = jest.fn().mockReturnValue({
+    (network.get as unknown as jest.Mock) = jest.fn().mockReturnValue({
       balances: {
         total_equity: 1000,
         total_cash: 100000,
@@ -21,7 +21,7 @@ describe('getBalances', () => {
   })
 
   it('Returns balances if cash account', async () => {
-    network.get = jest.fn().mockReturnValue({
+    (network.get as unknown as jest.Mock) = jest.fn().mockReturnValue({
       balances: {
         total_equity: 1000,
         total_cash: 100000,

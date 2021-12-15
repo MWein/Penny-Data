@@ -5,6 +5,10 @@
   This was despite a console.log of getMockReq both invoked and typeof'ed returning FUNCTION
   I spent 2 hours on this and for some goddam reason, changing it back to javascript fixed it
   I'm drinking right now
+
+
+  Nevermind. I figured it out.... making the mocks type safe resulted in a few parenthesis
+  I dont think I like typescript very much
 */
 
 
