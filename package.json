@@ -19,6 +19,7 @@
   },
   "homepage": "https://github.com/MWein/Penny-Data#readme",
   "dependencies": {
+    "@types/mongoose": "^5.11.97",
     "body-parser": "^1.19.0",
     "cors": "^2.8.5",
     "cron": "^1.8.2",

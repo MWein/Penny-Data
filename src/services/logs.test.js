@@ -1,4 +1,4 @@
-const logSchema = require('../db_models/logSchema')
+const { logModel } = require('../db_models/logSchema')
 const { getLogs } = require('./logs')
 
 describe('getLogs', () => {
@@ -7,7 +7,7 @@ describe('getLogs', () => {
     const sort = jest.fn().mockReturnValue({
       select,
     })
-    logSchema.find = jest.fn().mockReturnValue({
+    logModel.find = jest.fn().mockReturnValue({
       sort,
     })
 

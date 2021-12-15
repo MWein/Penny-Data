@@ -20,8 +20,8 @@ Move to Typescript todo list
 	[ ] gainLoss
 	[ ] incomeTargets
 	[ ] logs
-	[ ] pennyStatus
-	[ ] settings
+	[X] pennyStatus
+	[X] settings
 [ ] tradier
 	[X] getBalances
 	[ ] getOrders

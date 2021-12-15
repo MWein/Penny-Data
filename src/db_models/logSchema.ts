@@ -1,6 +1,6 @@
-const mongoose = require('mongoose')
+import { Schema, model, connect } from 'mongoose'
 
-const LogSchema = mongoose.Schema({
+const LogSchema = new Schema({
   date: {
     type: Date,
     required: true,
@@ -18,4 +18,8 @@ const LogSchema = mongoose.Schema({
   },
 })
 
-module.exports = mongoose.model('log', LogSchema)
+const logModel = model('log', LogSchema)
+
+export {
+  logModel
+}

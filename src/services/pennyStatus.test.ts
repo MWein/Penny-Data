@@ -1,4 +1,4 @@
-const logSchema = require('../db_models/logSchema')
+const { logModel } = require('../db_models/logSchema')
 const { getLastLogDate } = require('./pennyStatus')
 
 describe('getLastLogDate', () => {
@@ -7,7 +7,7 @@ describe('getLastLogDate', () => {
     const sort = jest.fn().mockReturnValue({
       select,
     })
-    logSchema.findOne = jest.fn().mockReturnValue({
+    logModel.findOne = jest.fn().mockReturnValue({
       sort,
     })
 

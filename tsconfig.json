@@ -11,5 +11,6 @@
     "./src/**/*.test.ts",
     "./src/**/*.test.js"
   ],
-  "module": "commonjs"
+  "module": "commonjs",
+  "esModuleInterop": true
 }

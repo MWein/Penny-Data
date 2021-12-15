@@ -1,6 +1,17 @@
 const settingSchema = require('../db_models/settingSchema')
 
-const defaultSettings = {
+type Settings = {
+  callsEnabled: Boolean,
+  putsEnabled: Boolean,
+  maxAllocation: Number,
+  maxPositions: Number,
+  reserve: Number,
+  buyToCloseAmount: Number,
+  customTickers: Array<String>,
+  bannedTickers: Array<String>,
+}
+
+const defaultSettings: Settings = {
   callsEnabled: true,
   putsEnabled: true,
   maxAllocation: 4000, // The maximum amount of money to put down on a single ticker
@@ -12,7 +23,7 @@ const defaultSettings = {
 }
 
 
-const getSettings = async () => {
+const getSettings = async () : Promise<Settings> => {
   const mongoSettings = await settingSchema.find()
 
   // Replace default settings if needed
@@ -27,7 +38,7 @@ const getSettings = async () => {
 }
 
 
-const setSettings = async changes => {
+const setSettings = async (changes: Settings) : Promise<Settings> => {
   await Promise.all(Object.keys(changes).map(async key => {
     const value = changes[key]
     await settingSchema.findOneAndUpdate({ key }, { key, value }, { upsert: true })
@@ -39,7 +50,7 @@ const setSettings = async changes => {
 }
 
 
-module.exports = {
+export {
   defaultSettings,
   getSettings,
   setSettings,
