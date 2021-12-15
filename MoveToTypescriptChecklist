@@ -31,6 +31,6 @@ Move to Typescript todo list
 [X] utils
 	[X] determineOptionType
 	[X] network
-	[X] testHelpers
+	[ ] testHelpers
 [X] app.js
 [X] server.js
