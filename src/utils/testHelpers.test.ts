@@ -1,8 +1,8 @@
-const {
+import {
   _generateSymbol,
   generateOrderObject,
   generatePositionObject,
-} = require('./testHelpers')
+} from './testHelpers'
 
 
 describe('_generateSymbol', () => {

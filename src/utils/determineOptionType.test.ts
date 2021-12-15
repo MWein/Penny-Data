@@ -1,8 +1,8 @@
-const {
+import {
   determineOptionTypeFromSymbol,
   isOption,
   getUnderlying,
-} = require('./determineOptionType')
+} from './determineOptionType'
 
 
 describe('determineOptionTypeFromSymbol', () => {

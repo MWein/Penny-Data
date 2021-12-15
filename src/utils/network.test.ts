@@ -1,9 +1,9 @@
-const superagent = require('superagent')
-const {
+import superagent from 'superagent'
+import {
   _createFormString,
   get,
   post,
-} = require('./network')
+} from './network'
 
 
 describe('_createFormString', () => {
