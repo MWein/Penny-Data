@@ -1,4 +1,4 @@
-import superagent from 'superagent'
+const superagent = require('superagent')
 import {
   _createFormString,
   get,

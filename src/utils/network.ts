@@ -1,4 +1,4 @@
-import superagent from 'superagent'
+const superagent = require('superagent')
 const NodeCache = require('node-cache')
 const getCache = new NodeCache()
 
