@@ -1,0 +1,36 @@
+Move to Typescript todo list
+
+
+[ ] controllers
+	[ ] accountSummary
+	[ ] gainLoss
+	[ ] getLogs
+	[ ] incomeTargets
+	[ ] pennyStatus
+	[ ] settings
+	[ ] watchlist
+[ ] db_models?
+	[ ] gainLossSchema
+	[ ] incomeTargetSchema
+	[ ] logSchema
+	[ ] positionHistorySchema
+	[ ] settingSchema
+[ ] services
+	[ ] accountSummary
+	[ ] gainLoss
+	[ ] incomeTargets
+	[ ] logs
+	[ ] pennyStatus
+	[ ] settings
+[ ] tradier
+	[X] getBalances
+	[ ] getOrders
+	[ ] getPositions
+	[ ] getQuotes
+	[X] watchlist
+[X] utils
+	[X] determineOptionType
+	[X] network
+	[X] testHelpers
+[ ] app.js
+[ ] server.js
