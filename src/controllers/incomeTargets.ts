@@ -20,7 +20,7 @@ const createIncomeTargetController = async (req, res) : Promise<void> => {
 }
 
 
-module.exports = {
+export {
   getIncomeTargetsController,
   createIncomeTargetController,
 }

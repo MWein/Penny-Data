@@ -1,19 +1,19 @@
 require('dotenv').config()
+
 import * as express from 'express'
 import * as bodyParser from 'body-parser'
 import * as cors from 'cors'
 
 import { pennyStatusController } from './controllers/pennyStatus'
-const { accountSummaryController } = require('./controllers/accountSummary')
+import { accountSummaryController } from './controllers/accountSummary'
 import { getLogsController } from './controllers/getLogs'
-const gainLoss = require('./controllers/gainLoss')
+import { getGainLossController, getGainLossGraphController } from './controllers/gainLoss'
 import { getSettingsController, setSettingsController } from './controllers/settings'
-const watchlist = require('./controllers/watchlist')
-const { getIncomeTargetsController, createIncomeTargetController } = require('./controllers/incomeTargets')
+import { getWatchlistController } from './controllers/watchlist'
+import { getIncomeTargetsController, createIncomeTargetController } from './controllers/incomeTargets'
 
 
 const app = express()
-
 
 app.use(bodyParser.json())
 app.use(cors())
@@ -26,14 +26,14 @@ app.get('/penny-status', pennyStatusController)
 app.get('/account-summary', accountSummaryController)
 
 // Watchlist Endpoints
-app.get('/watchlist', watchlist.getWatchlistController)
+app.get('/watchlist', getWatchlistController)
 
 // Dump all logs from the database
 app.get('/logs', getLogsController)
 
 
-app.get('/gain-loss', gainLoss.getGainLossController)
-app.get('/gain-loss-graph', gainLoss.getGainLossGraphController)
+app.get('/gain-loss', getGainLossController)
+app.get('/gain-loss-graph', getGainLossGraphController)
 
 
 // Settings

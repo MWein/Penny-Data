@@ -10,6 +10,6 @@ const accountSummaryController = async (req, res) : Promise<void> => {
   }
 }
 
-module.exports = {
+export {
   accountSummaryController
 }

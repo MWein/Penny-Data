@@ -9,6 +9,6 @@ const getWatchlistController = async (req, res) : Promise<void> => {
   }
 }
 
-module.exports = {
+export {
   getWatchlistController
 }
