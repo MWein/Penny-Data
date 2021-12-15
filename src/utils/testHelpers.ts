@@ -1,7 +1,12 @@
 // These functions generate mock orders and position objects for use in automated tests
 
+type EquityType = 'stock' | 'call' | 'put'
+type OrderSide = 'sell_to_open'
 
-const _generateSymbol = (symbol, type) => {
+const _generateSymbol = (
+    symbol: String,
+    type: EquityType
+  ) : String => {
   switch (type) {
   case 'stock':
     return symbol
@@ -13,7 +18,14 @@ const _generateSymbol = (symbol, type) => {
 }
 
 
-const generateOrderObject = (symbol, quantity=1, type='stock', side='sell_to_open', status='pending', id=123456) => {
+const generateOrderObject = (
+    symbol: String,
+    quantity: Number = 1,
+    type: EquityType = 'stock',
+    side: OrderSide = 'sell_to_open',
+    status: String ='pending',
+    id: Number = 123456
+  ) => {
   const ordClass = type === 'call' || type === 'put' ? 'option' : 'equity'
 
   const orderObj = {
@@ -46,7 +58,14 @@ const generateOrderObject = (symbol, quantity=1, type='stock', side='sell_to_ope
 }
 
 
-const generatePositionObject = (symbol, quantity=1, type='stock', cost_basis=100, date_acquired='2019-01-31T17:05', id=123456) =>
+const generatePositionObject = (
+    symbol: String,
+    quantity: Number = 1,
+    type: EquityType ='stock',
+    cost_basis: Number = 100,
+    date_acquired: String = '2019-01-31T17:05',
+    id: Number = 123456
+  ) =>
   ({
     cost_basis,
     date_acquired,
