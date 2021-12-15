@@ -12,7 +12,11 @@ const _createFormString = (body: Object) : String => Object.keys(body).map(key =
 }).join('&')
 
 
-const get = async (path: String, useCache: Boolean = true) : Promise<Object> => {
+type GenericObject = {
+  [key: string]: any
+}
+
+const get = async (path: String, useCache: Boolean = true) : Promise<GenericObject> => {
   const url = `${process.env.BASEPATH}${path}`
 
   if (useCache) {
@@ -39,7 +43,7 @@ const get = async (path: String, useCache: Boolean = true) : Promise<Object> => 
 }
 
 
-const post = async (path: String, body: Object) : Promise<Object> => {
+const post = async (path: String, body: Object) : Promise<GenericObject> => {
   const url = `${process.env.BASEPATH}${path}`
   const formString = _createFormString(body)
 
