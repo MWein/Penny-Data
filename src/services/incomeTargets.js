@@ -1,5 +1,5 @@
 const gainLossService = require('./gainLoss')
-const incomeTargetSchema = require('../db_models/incomeTargetSchema')
+const { incomeTargetModel } = require('../db_models/incomeTargetSchema')
 
 
 // Since they are not stackable I don't have to mess with the income values
@@ -65,7 +65,7 @@ const _evaluateStackableTargets = (targets, scopeIncomeMap) => {
 
 
 const incomeTargets = async () => {
-  const incomeTargets = await incomeTargetSchema.find().select('-__v')
+  const incomeTargets = await incomeTargetModel.find().select('-__v')
   if (incomeTargets.length === 0) {
     return []
   }
@@ -101,7 +101,7 @@ const incomeTargets = async () => {
 
 
 const createIncomeTarget = async newTarget => {
-  const newRecord = new incomeTargetSchema(newTarget)
+  const newRecord = new incomeTargetModel(newTarget)
   await newRecord.save()
 }
 

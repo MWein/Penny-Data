@@ -1,6 +1,6 @@
-const mongoose = require('mongoose')
+import { Schema, model } from 'mongoose'
 
-const GainLossSchema = mongoose.Schema({
+const GainLossSchema = new Schema({
   hashId: {
     type: String,
     required: true,
@@ -35,4 +35,8 @@ const GainLossSchema = mongoose.Schema({
   },
 })
 
-module.exports = mongoose.model('closedTrade', GainLossSchema)
+const gainLossModel = model('closedTrade', GainLossSchema)
+
+export {
+  gainLossModel
+}

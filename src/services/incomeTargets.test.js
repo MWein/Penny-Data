@@ -1,5 +1,5 @@
 const gainLossService = require('./gainLoss')
-const incomeTargetSchema = require('../db_models/incomeTargetSchema')
+const { incomeTargetModel } = require('../db_models/incomeTargetSchema')
 
 jest.mock('../db_models/incomeTargetSchema')
 
@@ -137,7 +137,7 @@ describe('incomeTargets', () => {
     jest.useFakeTimers().setSystemTime(new Date('2021-10-12').getTime())
     gainLossService.getGainLoss = jest.fn()
     select = jest.fn()
-    incomeTargetSchema.find = jest.fn().mockReturnValue({
+    incomeTargetModel.find = jest.fn().mockReturnValue({
       select
     })
   })
@@ -206,14 +206,14 @@ describe('incomeTargets', () => {
 describe('createIncomeTarget', () => {
   it('Creates the new record and saves it to the database', async () => {
     let saveFunc = jest.fn()
-    incomeTargetSchema.mockReturnValue({
+    incomeTargetModel.mockReturnValue({
       save: saveFunc
     })
     const mockTarget = {
       some: 'target'
     }
     await createIncomeTarget(mockTarget)
-    expect(incomeTargetSchema).toHaveBeenCalledWith(mockTarget)
+    expect(incomeTargetModel).toHaveBeenCalledWith(mockTarget)
     expect(saveFunc).toHaveBeenCalled()
   })
 })

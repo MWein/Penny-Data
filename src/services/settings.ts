@@ -1,4 +1,4 @@
-const settingSchema = require('../db_models/settingSchema')
+const { settingsModel } = require('../db_models/settingSchema')
 
 type Settings = {
   callsEnabled: Boolean,
@@ -24,7 +24,7 @@ const defaultSettings: Settings = {
 
 
 const getSettings = async () : Promise<Settings> => {
-  const mongoSettings = await settingSchema.find()
+  const mongoSettings = await settingsModel.find()
 
   // Replace default settings if needed
   const settings = mongoSettings.reduce((acc, setting) => (
@@ -41,7 +41,7 @@ const getSettings = async () : Promise<Settings> => {
 const setSettings = async (changes: Settings) : Promise<Settings> => {
   await Promise.all(Object.keys(changes).map(async key => {
     const value = changes[key]
-    await settingSchema.findOneAndUpdate({ key }, { key, value }, { upsert: true })
+    await settingsModel.findOneAndUpdate({ key }, { key, value }, { upsert: true })
   }))
 
   const newSettings = await getSettings()

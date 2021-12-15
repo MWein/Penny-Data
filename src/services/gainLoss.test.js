@@ -1,5 +1,5 @@
-const gainLossSchema = require('../db_models/gainLossSchema')
-const PositionHistorySchema = require('../db_models/positionHistorySchema')
+const { gainLossModel } = require('../db_models/gainLossSchema')
+const { positionHistoryModel } = require('../db_models/positionHistorySchema')
 
 const {
   _retrieveDataBasedOnEnvironment,
@@ -16,10 +16,10 @@ describe('_retrieveDataBasedOnEnvironment', () => {
     sort = jest.fn().mockReturnValue({
       select
     })
-    gainLossSchema.find = jest.fn().mockReturnValue({
+    gainLossModel.find = jest.fn().mockReturnValue({
       sort
     })
-    PositionHistorySchema.find = jest.fn().mockReturnValue({
+    positionHistoryModel.find = jest.fn().mockReturnValue({
       sort
     })
   })
@@ -29,7 +29,7 @@ describe('_retrieveDataBasedOnEnvironment', () => {
     select.mockReturnValue('somethingelse')
     const result = await _retrieveDataBasedOnEnvironment(new Date(0), new Date())
     expect(result).toEqual('somethingelse')
-    expect(gainLossSchema.find).toHaveBeenCalled()
+    expect(gainLossModel.find).toHaveBeenCalled()
     expect(select).toHaveBeenCalled()
   })
 
@@ -50,7 +50,7 @@ describe('_retrieveDataBasedOnEnvironment', () => {
         gain_loss: 20,
       }
     ])
-    expect(PositionHistorySchema.find).toHaveBeenCalled()
+    expect(positionHistoryModel.find).toHaveBeenCalled()
     expect(select).toHaveBeenCalled()
   })
 })

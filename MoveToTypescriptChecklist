@@ -9,12 +9,12 @@ Move to Typescript todo list
 	[ ] pennyStatus
 	[ ] settings
 	[ ] watchlist
-[ ] db_models?
-	[ ] gainLossSchema
-	[ ] incomeTargetSchema
+[X] db_models?
+	[X] gainLossSchema
+	[X] incomeTargetSchema
 	[X] logSchema
-	[ ] positionHistorySchema
-	[ ] settingSchema
+	[X] positionHistorySchema
+	[X] settingSchema
 [ ] services
 	[ ] accountSummary
 	[ ] gainLoss

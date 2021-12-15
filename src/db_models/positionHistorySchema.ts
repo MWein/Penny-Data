@@ -1,6 +1,6 @@
-const mongoose = require('mongoose')
+import { Schema, model } from 'mongoose'
 
-const PositionHistorySchema = mongoose.Schema({
+const PositionHistorySchema = new Schema({
   id: {
     type: String,
     required: true,
@@ -23,4 +23,8 @@ const PositionHistorySchema = mongoose.Schema({
   }
 })
 
-module.exports = mongoose.model('positionHistory', PositionHistorySchema)
+const positionHistoryModel = model('positionHistory', PositionHistorySchema)
+
+export {
+  positionHistoryModel
+}

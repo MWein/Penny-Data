@@ -1,6 +1,6 @@
-const mongoose = require('mongoose')
+import { Schema, model } from 'mongoose'
 
-const IncomeTargetSchema = mongoose.Schema({
+const IncomeTargetSchema = new Schema({
   name: {
     type: String,
     required: true,
@@ -20,4 +20,8 @@ const IncomeTargetSchema = mongoose.Schema({
   },
 })
 
-module.exports = mongoose.model('incomeTarget', IncomeTargetSchema)
+const incomeTargetModel = model('incomeTarget', IncomeTargetSchema)
+
+export {
+  incomeTargetModel
+}

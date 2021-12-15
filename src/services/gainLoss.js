@@ -1,5 +1,5 @@
-const gainLossSchema = require('../db_models/gainLossSchema')
-const PositionHistorySchema = require('../db_models/positionHistorySchema')
+const { gainLossModel } = require('../db_models/gainLossSchema')
+const { positionHistoryModel } = require('../db_models/positionHistorySchema')
 const {
   isOption,
   determineOptionTypeFromSymbol
@@ -12,14 +12,14 @@ const _retrieveDataBasedOnEnvironment = async (startDate, endDate) => {
   const envrionment = process.env.BASEPATH.includes('sandbox') ? 'np' : 'prod'
 
   if (envrionment === 'prod') {
-    const gainLossData = await gainLossSchema
+    const gainLossData = await gainLossModel
       .find({ close_date: { $gte: startDate, $lte: endDate } })
       .sort({ close_date: -1 })
       .select('-_id -__v -hashId')
 
     return gainLossData
   } else {
-    const positionHistoryData = await PositionHistorySchema
+    const positionHistoryData = await positionHistoryModel
       .find({ acquired: { $gte: startDate, $lte: endDate } })
       .sort({ acquired: -1 })
       .select('-_id -__v -hashId')
