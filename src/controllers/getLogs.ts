@@ -9,6 +9,6 @@ const getLogsController = async (req, res) : Promise<void> => {
   }
 }
 
-module.exports = {
+export {
   getLogsController
 }

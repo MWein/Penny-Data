@@ -1,17 +1,18 @@
 require('dotenv').config()
-const express = require('express')
-const app = express()
-const bodyParser = require('body-parser')
-const cors = require('cors')
+import * as express from 'express'
+import * as bodyParser from 'body-parser'
+import * as cors from 'cors'
 
-const { pennyStatusController } = require('./controllers/pennyStatus')
-
+import { pennyStatusController } from './controllers/pennyStatus'
 const { accountSummaryController } = require('./controllers/accountSummary')
-const { getLogsController } = require('./controllers/getLogs')
+import { getLogsController } from './controllers/getLogs'
 const gainLoss = require('./controllers/gainLoss')
 const settings = require('./controllers/settings')
 const watchlist = require('./controllers/watchlist')
 const { getIncomeTargetsController, createIncomeTargetController } = require('./controllers/incomeTargets')
+
+
+const app = express()
 
 
 app.use(bodyParser.json())
@@ -45,4 +46,4 @@ app.get('/income-targets', getIncomeTargetsController)
 app.post('/income-targets', createIncomeTargetController)
 
 
-export = app
+export default app

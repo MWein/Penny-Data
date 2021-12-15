@@ -13,6 +13,6 @@ const pennyStatusController = async (req, res) : Promise<void> => {
   }
 }
 
-module.exports = {
+export {
   pennyStatusController
 }
