@@ -3,7 +3,7 @@ const {
   getGainLossController,
   getGainLossGraphController,
 } = require('./gainLoss')
-const { getMockReq, getMockRes } = require('@jest-mock/express')
+import { getMockReq, getMockRes } from '@jest-mock/express'
 
 
 describe('getGainLossController', () => {

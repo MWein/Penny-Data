@@ -1,6 +1,6 @@
 const accountSummaryUtil = require('../services/accountSummary')
 const { accountSummaryController } = require('./accountSummary')
-const { getMockReq, getMockRes } = require('@jest-mock/express')
+import { getMockReq, getMockRes } from '@jest-mock/express'
 
 
 describe('accountSummaryController', () => {

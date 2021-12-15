@@ -3,7 +3,7 @@ const {
   getIncomeTargetsController,
   createIncomeTargetController
 } = require('./incomeTargets')
-const { getMockReq, getMockRes } = require('@jest-mock/express')
+import { getMockReq, getMockRes } from '@jest-mock/express'
 
 
 describe('getIncomeTargetsController', () => {

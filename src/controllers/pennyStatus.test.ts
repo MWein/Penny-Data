@@ -1,6 +1,6 @@
 const pennyStatusUtil = require('../services/pennyStatus')
 const { pennyStatusController } = require('./pennyStatus')
-const { getMockReq, getMockRes } = require('@jest-mock/express')
+import { getMockReq, getMockRes } from '@jest-mock/express'
 
 
 describe('pennyStatusController', () => {

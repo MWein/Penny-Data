@@ -1,6 +1,6 @@
 const logService = require('../services/logs')
 const { getLogsController } = require('./getLogs')
-const { getMockReq, getMockRes } = require('@jest-mock/express')
+import { getMockReq, getMockRes } from '@jest-mock/express'
 
 
 describe('getLogsController', () => {

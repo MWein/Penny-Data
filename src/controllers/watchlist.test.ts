@@ -1,6 +1,6 @@
 const watchlistUtil = require('../tradier/watchlist')
 const { getWatchlistController } = require('./watchlist')
-const { getMockReq, getMockRes } = require('@jest-mock/express')
+import { getMockReq, getMockRes } from '@jest-mock/express'
 
 
 describe('getWatchlistController', () => {

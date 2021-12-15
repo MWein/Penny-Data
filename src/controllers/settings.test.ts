@@ -3,7 +3,7 @@ const {
   getSettingsController,
   setSettingsController,
 } = require('./settings')
-const { getMockReq, getMockRes } = require('@jest-mock/express')
+import { getMockReq, getMockRes } from '@jest-mock/express'
 
 
 describe('getSettingsController', () => {
