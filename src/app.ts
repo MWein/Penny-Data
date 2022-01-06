@@ -12,6 +12,7 @@ import { getSettingsController, setSettingsController } from './controllers/sett
 import { getWatchlistController } from './controllers/watchlist'
 import { getIncomeTargetsController, createIncomeTargetController } from './controllers/incomeTargets'
 
+import { premiumEarnedController, premiumGraphController } from './controllers/premiumHistory'
 
 const app = express()
 
@@ -34,6 +35,9 @@ app.get('/logs', getLogsController)
 
 app.get('/gain-loss', getGainLossController)
 app.get('/gain-loss-graph', getGainLossGraphController)
+
+app.get('/premium-earned', premiumEarnedController)
+app.get('/premium-graph', premiumGraphController)
 
 
 // Settings
