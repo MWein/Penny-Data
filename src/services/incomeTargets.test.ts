@@ -1,4 +1,4 @@
-import * as gainLossService from './gainLoss'
+import * as premiumHistoryService from './premiumHistory'
 import { incomeTargetModel } from '../db_models/incomeTargetSchema'
 
 jest.mock('../db_models/incomeTargetSchema')
@@ -135,7 +135,7 @@ describe('incomeTargets', () => {
 
   beforeEach(() => {
     jest.useFakeTimers().setSystemTime(new Date('2021-10-12').getTime())
-    gainLossService.getGainLoss = jest.fn()
+    premiumHistoryService.premiumEarned = jest.fn()
     select = jest.fn()
     incomeTargetModel.find = jest.fn().mockReturnValue({
       select
@@ -150,39 +150,39 @@ describe('incomeTargets', () => {
     select.mockReturnValue([])
     const result = await incomeTargets()
     expect(result).toEqual([])
-    expect(gainLossService.getGainLoss).not.toHaveBeenCalled()
+    expect(premiumHistoryService.premiumEarned).not.toHaveBeenCalled()
   })
 
   it('Calls gainLossService to get year, month, and allTime values', async () => {
     select.mockReturnValue(mockTargets)
-    gainLossService.getGainLoss.mockReturnValue({
-      totalGL: 0
+    premiumHistoryService.premiumEarned.mockReturnValue({
+      totalPremium: 0
     })
 
     await incomeTargets()
 
-    expect(gainLossService.getGainLoss).toHaveBeenCalledTimes(3)
-    expect(gainLossService.getGainLoss).toHaveBeenCalledWith(
-      new Date('1970-01-01T00:00:00.000Z'),
-      new Date('2021-10-12T00:00:00.000Z')
+    expect(premiumHistoryService.premiumEarned).toHaveBeenCalledTimes(3)
+    expect(premiumHistoryService.premiumEarned).toHaveBeenCalledWith(
+      '1970-01-01',
+      '2021-10-12'
     ) // All Time
 
-    expect(gainLossService.getGainLoss).toHaveBeenCalledWith(
-      new Date('2021-10-01T00:00:00.000Z'),
-      new Date('2021-10-12T00:00:00.000Z')
+    expect(premiumHistoryService.premiumEarned).toHaveBeenCalledWith(
+      '2021-10-01',
+      '2021-10-12'
     ) // Month
 
-    expect(gainLossService.getGainLoss).toHaveBeenCalledWith(
-      new Date('2021-01-01T00:00:00.000Z'),
-      new Date('2021-10-12T00:00:00.000Z')
+    expect(premiumHistoryService.premiumEarned).toHaveBeenCalledWith(
+      '2021-01-01',
+      '2021-10-12'
     ) // Year
   })
 
   it('Returns evaluated targets', async () => {
     select.mockReturnValue(mockTargets)
-    gainLossService.getGainLoss.mockReturnValueOnce({ totalGL: 10000 }) // All Time
-    gainLossService.getGainLoss.mockReturnValueOnce({ totalGL: 2000 }) // Month
-    gainLossService.getGainLoss.mockReturnValueOnce({ totalGL: 4000 }) // Year
+    premiumHistoryService.premiumEarned.mockReturnValueOnce({ totalPremium: 10000 }) // All Time
+    premiumHistoryService.premiumEarned.mockReturnValueOnce({ totalPremium: 2000 }) // Month
+    premiumHistoryService.premiumEarned.mockReturnValueOnce({ totalPremium: 4000 }) // Year
 
     const result = await incomeTargets()
 

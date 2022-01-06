@@ -1,4 +1,4 @@
-import * as gainLossService from './gainLoss'
+import * as premiumHistoryService from './premiumHistory'
 import { incomeTargetModel } from '../db_models/incomeTargetSchema'
 
 
@@ -71,23 +71,25 @@ const incomeTargets = async () => {
   }
 
   const today = new Date()
-  const firstOfYear = new Date(`${today.getFullYear()}-01-01`)
-  const firstOfMonth = new Date(`${today.getFullYear()}-${today.getMonth() + 1}-01`)
+  const todayStr = today.toISOString().split('T')[0]
+  const firstOfYear = `${today.getFullYear()}-01-01`
+  const monthStr = today.getMonth() + 1 <= 9 ? `0${today.getMonth() + 1}` : `${today.getMonth() + 1}`
+  const firstOfMonth = `${today.getFullYear()}-${monthStr}-01`
 
   const [
     allTimeGL,
     monthGL,
     yearGL,
   ] = await Promise.all([
-    gainLossService.getGainLoss(new Date(0), today),
-    gainLossService.getGainLoss(firstOfMonth, today),
-    gainLossService.getGainLoss(firstOfYear, today),
+    premiumHistoryService.premiumEarned('1970-01-01', todayStr),
+    premiumHistoryService.premiumEarned(firstOfMonth, todayStr),
+    premiumHistoryService.premiumEarned(firstOfYear, todayStr),
   ])
 
   const scopeIncomeMap = {
-    month: monthGL.totalGL,
-    year: yearGL.totalGL,
-    allTime: allTimeGL.totalGL
+    month: monthGL.totalPremium,
+    year: yearGL.totalPremium,
+    allTime: allTimeGL.totalPremium
   }
 
   const evaluatedNonStackableTargets = _evaluateNonStackableTargets(incomeTargets, scopeIncomeMap)
