@@ -81,7 +81,7 @@ const incomeTargets = async () => {
     monthGL,
     yearGL,
   ] = await Promise.all([
-    premiumHistoryService.premiumEarned('2020-01-01', todayStr), // Before Penny started
+    premiumHistoryService.premiumEarned('1970-01-01', todayStr),
     premiumHistoryService.premiumEarned(firstOfMonth, todayStr),
     premiumHistoryService.premiumEarned(firstOfYear, todayStr),
   ])
