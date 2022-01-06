@@ -7,7 +7,7 @@ import * as cors from 'cors'
 import { pennyStatusController } from './controllers/pennyStatus'
 import { accountSummaryController } from './controllers/accountSummary'
 import { getLogsController } from './controllers/getLogs'
-import { getGainLossController, getGainLossGraphController } from './controllers/gainLoss'
+//import { getGainLossController, getGainLossGraphController } from './controllers/gainLoss'
 import { getSettingsController, setSettingsController } from './controllers/settings'
 import { getWatchlistController } from './controllers/watchlist'
 import { getIncomeTargetsController, createIncomeTargetController } from './controllers/incomeTargets'
@@ -33,8 +33,8 @@ app.get('/watchlist', getWatchlistController)
 app.get('/logs', getLogsController)
 
 
-app.get('/gain-loss', getGainLossController)
-app.get('/gain-loss-graph', getGainLossGraphController)
+//app.get('/gain-loss', getGainLossController)
+//app.get('/gain-loss-graph', getGainLossGraphController)
 
 app.get('/premium-earned', premiumEarnedController)
 app.get('/premium-graph', premiumGraphController)
