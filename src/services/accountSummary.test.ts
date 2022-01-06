@@ -1,7 +1,6 @@
 import * as balancesUtil from '../tradier/getBalances'
 import * as  positionUtil from '../tradier/getPositions'
 import { isOption, determineOptionTypeFromSymbol, getUnderlying } from '../utils/determineOptionType'
-import * as  gainLossService from './gainLoss'
 import * as  quotesUtil from '../tradier/getQuotes'
 import * as  ordersUtil from '../tradier/getOrders'
 

@@ -15,7 +15,7 @@ const premiumEarnedController = async (req, res) : Promise<void> => {
 
 const _dateOneMonthAgo = () => {
   const date = new Date()
-  date.setDate(date.getDate() - 31)
+  date.setDate(date.getDate() - 90)
   return date.toISOString().split('T')[0]
 }
 

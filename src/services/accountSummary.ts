@@ -1,7 +1,6 @@
 import * as balancesUtil from '../tradier/getBalances'
 import * as  positionUtil from '../tradier/getPositions'
 import { isOption, determineOptionTypeFromSymbol, getUnderlying } from '../utils/determineOptionType'
-import * as  gainLossService from './gainLoss'
 import * as  quotesUtil from '../tradier/getQuotes'
 import * as  ordersUtil from '../tradier/getOrders'
 const uniqBy = require('lodash/uniqBy')
@@ -60,26 +59,18 @@ const _matchOptionsToBTCOrders = (formattedOptions, buyToCloseOrders) =>
       }
     }
   }, {}))
-    .sort((a: OptionContract, b: OptionContract) => new Date(a.expiration).valueOf() - new Date(b.expiration).valueOf())
+    .sort((a: OptionContract, b: OptionContract) : number => new Date(a.expiration).valueOf() - new Date(b.expiration).valueOf())
 
 
 const accountSummary = async () => {
-  const today = new Date()
-  const firstOfYear = new Date(`${today.getFullYear()}-01-01`)
-  const firstOfMonth = new Date(`${today.getFullYear()}-${today.getMonth() + 1}-01`)
-
   const [
     balances,
     orders,
     openPositions,
-    monthGainLoss,
-    yearGainLoss,
   ] = await Promise.all([
     balancesUtil.getBalances(),
     ordersUtil.getOrders(),
     positionUtil.getPositions(),
-    gainLossService.getGainLoss(firstOfMonth, today),
-    gainLossService.getGainLoss(firstOfYear, today),
   ])
 
   const options = openPositions.filter(pos => isOption(pos.symbol))
@@ -93,22 +84,8 @@ const accountSummary = async () => {
   const formattedOptions = _formatOptions(options, quotes)
   const optionsContracts = _matchOptionsToBTCOrders(formattedOptions, buyToCloseOrders)
 
-
-  const monthOptionProfit = monthGainLoss.optionGL
-  const monthStockProfit = monthGainLoss.stockGL
-  const monthTotalProfit = monthGainLoss.totalGL
-  const yearOptionProfit = yearGainLoss.optionGL
-  const yearStockProfit = yearGainLoss.stockGL
-  const yearTotalProfit = yearGainLoss.totalGL
-
   return {
     ...balances,
-    monthOptionProfit,
-    monthStockProfit,
-    monthTotalProfit,
-    yearOptionProfit,
-    yearStockProfit,
-    yearTotalProfit,
     optionsContracts,
   }
 }
