@@ -25,8 +25,6 @@ const premiumGraphController = async (req, res) : Promise<void> => {
     const startDate = req.query.start || _dateOneMonthAgo()
     const endDate = req.query.end || new Date().toISOString().slice(0, 10)
 
-    console.log(startDate)
-
     const premiumGraph = await premiumHistoryUtil.premiumGraph(startDate, endDate)
 
     res.json(premiumGraph)
