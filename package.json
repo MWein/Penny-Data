@@ -4,9 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "nodemon server.js",
-    "start": "node server.js",
-    "test": "jest --coverage"
+    "start": "ts-node ./src/server.ts",
+    "test": "jest --coverage",
+    "build": "tsc"
   },
   "repository": {
     "type": "git",
@@ -19,6 +19,7 @@
   },
   "homepage": "https://github.com/MWein/Penny-Data#readme",
   "dependencies": {
+    "@types/mongoose": "^5.11.97",
     "body-parser": "^1.19.0",
     "cors": "^2.8.5",
     "cron": "^1.8.2",
@@ -30,10 +31,15 @@
     "superagent": "^6.1.0"
   },
   "devDependencies": {
-    "jest": "^27.3.1",
+    "@babel/core": "^7.16.5",
+    "@babel/preset-env": "^7.16.5",
+    "@babel/preset-typescript": "^7.16.5",
+    "@jest-mock/express": "1.4.5",
+    "@types/jest": "^27.0.3",
+    "babel-jest": "^27.4.5",
     "eslint": "^8.1.0",
     "eslint-plugin-jest": "^25.2.2",
-    "nodemon": "^2.0.14",
-    "@jest-mock/express": "1.4.5"
+    "jest": "^27.3.1",
+    "nodemon": "^2.0.14"
   }
 }

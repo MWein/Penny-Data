@@ -1,0 +1,25 @@
+import { Schema, model } from 'mongoose'
+
+const LogSchema = new Schema({
+  date: {
+    type: Date,
+    required: true,
+    default: Date.now,
+  },
+  type: {
+    type: String,
+    required: true,
+    enum: [ 'info', 'ping', 'error' ],
+    default: 'info',
+  },
+  message: {
+    type: String,
+    required: true,
+  },
+})
+
+const logModel = model('log', LogSchema)
+
+export {
+  logModel
+}

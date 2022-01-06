@@ -1,0 +1,27 @@
+Move to Typescript todo list
+
+
+[ ] controllers
+	[ ] accountSummary
+	[ ] gainLoss
+	[ ] getLogs
+	[ ] incomeTargets
+	[ ] pennyStatus
+	[ ] settings
+	[ ] watchlist
+[ ] services
+	[ ] accountSummary
+	[ ] gainLoss
+	[ ] incomeTargets
+	[X] logs
+	[X] pennyStatus
+	[X] settings
+[ ] tradier
+	[X] getBalances
+	[ ] getOrders
+	[ ] getPositions
+	[ ] getQuotes
+	[X] watchlist
+
+
+[ ] Make all tests JS again. Not worth it.
