@@ -17,7 +17,7 @@ const getBalances = async () : Promise<Balance> => {
   const optionBuyingPower = buyingPowerObj.option_buying_power || buyingPowerObj.cash_available
 
   return {
-    equity: balancesObj.total_equity,
+    equity: balancesObj.total_equity - balancesObj.short_market_value,
     totalCash: balancesObj.total_cash,
     optionBuyingPower,
   }

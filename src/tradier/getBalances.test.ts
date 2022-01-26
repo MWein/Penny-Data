@@ -7,6 +7,7 @@ describe('getBalances', () => {
       balances: {
         total_equity: 1000,
         total_cash: 100000,
+        short_market_value: 0,
         margin: {
           option_buying_power: 700
         }
@@ -25,6 +26,7 @@ describe('getBalances', () => {
       balances: {
         total_equity: 1000,
         total_cash: 100000,
+        short_market_value: 0,
         cash: {
           cash_available: 800
         }
