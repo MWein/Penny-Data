@@ -1,4 +1,4 @@
-import * as watchlistUtil from '../tradier/watchlist'
+import * as watchlistUtil from '../services/watchlist'
 
 const getWatchlistController = async (req, res) : Promise<void> => {
   try {
