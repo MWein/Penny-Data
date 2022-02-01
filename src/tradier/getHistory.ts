@@ -21,6 +21,11 @@ const getOptionTradeHistory = async (startDate : string, endDate : string) : Pro
   const response = await networkUtil.get(url)
   const historyObj = response?.history?.event
 
+  // On the first day of the month, historyObj might be undefined
+  if (!historyObj) {
+    return []
+  }
+
   return historyObj
 }
 
