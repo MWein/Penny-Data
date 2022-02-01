@@ -1,4 +1,4 @@
-import * as watchlistUtil from '../tradier/watchlist'
+import * as watchlistUtil from '../services/watchlist'
 import { getWatchlistController } from './watchlist'
 import { getMockReq, getMockRes } from '@jest-mock/express'
 
