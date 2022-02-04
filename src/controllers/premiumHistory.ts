@@ -8,6 +8,7 @@ const premiumEarnedController = async (req, res) : Promise<void> => {
 
     res.json(premiumHistory)
   } catch (e) {
+    console.log(e)
     res.status(500).send('Error')
   }
 }
@@ -29,6 +30,7 @@ const premiumGraphController = async (req, res) : Promise<void> => {
 
     res.json(premiumGraph)
   } catch (e) {
+    console.log(e)
     res.status(500).send('Error')
   }
 }
